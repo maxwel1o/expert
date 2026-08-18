@@ -1,0 +1,58 @@
+{
+  "skill": "wav2vec2-xlsr-53-npu",
+  "description": "Wav2Vec2-XLSR-53 系列模型 NPU 部署精度与性能测试用例",
+  "test_cases": [
+    {
+      "id": "wav2vec2-large-xlsr-53-base",
+      "model": "facebook/wav2vec2-large-xlsr-53",
+      "prompts": [],
+      "audio_params": {
+        "durations": [0.5, 1.0, 3.0, 5.0, 10.0],
+        "sample_rate": 16000
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "l2_relative_error": 0.05
+      }
+    },
+    {
+      "id": "wav2vec2-large-xlsr-53-english",
+      "model": "jonatasgrosman/wav2vec2-large-xlsr-53-english",
+      "prompts": [],
+      "audio_params": {
+        "durations": [0.5, 1.0, 3.0, 5.0],
+        "sample_rate": 16000
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "l2_relative_error": 0.05
+      }
+    },
+    {
+      "id": "wav2vec2-large-xlsr-53-chinese-zh-cn",
+      "model": "jonatasgrosman/wav2vec2-large-xlsr-53-chinese-zh-cn",
+      "prompts": [],
+      "audio_params": {
+        "durations": [0.5, 1.0, 3.0, 5.0],
+        "sample_rate": 16000
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "l2_relative_error": 0.05
+      }
+    },
+    {
+      "id": "wav2vec2-large-xlsr-53-gender-recognition-librispeech",
+      "model": "alefiury/wav2vec2-large-xlsr-53-gender-recognition-librispeech",
+      "prompts": [],
+      "audio_params": {
+        "durations": [0.5, 1.0, 3.0],
+        "sample_rate": 16000
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "l2_relative_error": 0.05
+      }
+    }
+  ]
+}

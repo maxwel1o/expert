@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "scenario": "VTP-Small-f16d64 NPU 端到端部署与推理验证",
+    "prompt": "请使用 vtp-small-f16d64-npu 技能，在华为昇腾 NPU 上部署 MiniMax VTP-Small-f16d64 模型并进行推理验证。需要完成：环境初始化（CANN加载、NPU检查）、依赖安装、权重下载（ModelScope）、基础冒烟测试和NPU vs CPU精度对比。",
+    "expected_output": "环境初始化成功，torch.npu.is_available()为True；模型权重下载完成（~638MB）；NPU推理输出shape正确([1,768], [1,64,16,16], [1,3,256,256])；精度对比所有检查PASS，归一化最大误差<1%。",
+    "checkpoints": [
+      "CANN环境加载确认",
+      "NPU卡可用性确认",
+      "依赖安装验证",
+      "权重完整性验证"
+    ],
+    "eval_criteria": [
+      "环境初始化步骤完整执行",
+      "NPU推理平均延迟<1000ms",
+      "精度对比归一化最大误差<1%",
+      "重建输出PSNR>35dB"
+    ]
+  },
+  {
+    "id": 2,
+    "scenario": "异常恢复与重试验证",
+    "prompt": "使用 vtp-small-f16d64-npu 技能，模拟网络超时导致 HuggingFace 权重下载失败场景。需要执行：先使用普通下载（应该失败），然后设置镜像源重试，验证断点续传功能。最后在真实下载成功后完成推理验证。",
+    "expected_output": "首次下载失败后正确捕获异常；切换到国内镜像源后成功续传；下载完成后推理脚本正常执行，精度对比通过。",
+    "checkpoints": [
+      "下载失败异常处理",
+      "镜像源切换"
+    ],
+    "eval_criteria": [
+      "异常场景正确处理",
+      "镜像源切换成功",
+      "断点续传功能验证",
+      "最终推理验证通过"
+    ]
+  },
+  {
+    "id": 3,
+    "scenario": "多精度推理与OOM恢复",
+    "prompt": "使用 vtp-small-f16d64-npu 技能，测试模型在不同精度（fp32, bf16）下的推理性能。先在 bf16 精度下快速验证，再切换到 fp32 做精度对比。模拟 OOM 场景，需要切换 NPU 卡号并减小 batch_size 后继续完成验证。",
+    "expected_output": "bf16和fp32精度推理均成功；OOM后正确回退到其他NPU卡；精度对比所有指标通过。",
+    "checkpoints": [
+      "精度切换",
+      "OOM恢复"
+    ],
+    "eval_criteria": [
+      "多精度推理结果正确",
+      "OOM异常正确处理",
+      "卡号切换成功",
+      "精度对比通过"
+    ]
+  },
+  {
+    "id": 4,
+    "scenario": "ImageNet批量重建与FID评估",
+    "prompt": "使用 vtp-small-f16d64-npu 技能，在 ImageNet 验证集上执行批量重建评估。需要先在单卡上测试少量样本，然后切换到 DDP 多卡模式运行完整评估。最后使用 torchmetrics 计算 FID 和 Inception Score。",
+    "expected_output": "单卡和DDP模式均正确执行；重建图像输出shape正确；FID和IS指标计算完成。",
+    "checkpoints": [
+      "单卡模式验证",
+      "DDP多卡配置"
+    ],
+    "eval_criteria": [
+      "单卡推理输出正确",
+      "DDP多卡初始化成功",
+      "FID指标计算正确",
+      "重建质量符合预期"
+    ]
+  }
+]

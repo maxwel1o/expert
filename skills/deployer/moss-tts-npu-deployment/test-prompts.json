@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "I want to deploy MOSS-TTS on Ascend NPU for text-to-speech",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "intent"
+  },
+  {
+    "prompt": "How do I run MOSS-TTS Nano inference on NPU?",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "usage"
+  },
+  {
+    "prompt": "Set up MOSS-TTS with PyTorch on Ascend 910B4",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "setup"
+  },
+  {
+    "prompt": "Compare NPU vs CPU accuracy for MOSS-TTS",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "evaluation"
+  },
+  {
+    "prompt": "MOSS-TTS ONNX inference on NPU failing",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "Download MOSS-TTS weights from HuggingFace mirror",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "setup"
+  },
+  {
+    "prompt": "MOSS-TTS voice cloning on Ascend NPU",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "usage"
+  },
+  {
+    "prompt": "Check MOSS-TTS audio quality and accuracy metrics",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "evaluation"
+  },
+  {
+    "prompt": "Fix torch_npu module not found for MOSS-TTS",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "MOSS-TTS ONNX runtime ascend extension missing",
+    "expected_skill": "moss-tts-npu-deployment",
+    "category": "troubleshooting"
+  }
+]

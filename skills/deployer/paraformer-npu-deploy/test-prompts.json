@@ -1,0 +1,14 @@
+[
+  {
+    "prompt": "请部署 FunASR Paraformer 基础 ASR 模型（Model 1）到昇腾 NPU 上进行推理验证，包括环境初始化、依赖安装、测试音频下载和模型推理（含 warmup 和 benchmark 各 3 轮），最后输出转录文本和性能数据。",
+    "expected": "NPU 推理成功，转录文本为'欢迎大家来体验达摩院推出的语音识别模型'，RTF < 0.3"
+  },
+  {
+    "prompt": "请使用 eval_all.py 对全部 3 个 FunASR Paraformer 模型进行 NPU vs CPU 精度对比和性能 Benchmark，输出精度一致性百分比和加速比。",
+    "expected": "三模型 NPU vs CPU 精度 100% 一致，加速比 1.8x-2.8x"
+  },
+  {
+    "prompt": "部署 Paraformer Model 3（ASR+VAD+Punc+SPK）时遇到 RuntimeError: Expected mat1 on same device as weight，请诊断并修复该问题，确保所有子模型正确分配设备。",
+    "expected": "确认 VAD/Punc/SPK 子模型留在 CPU，仅 ASR 主模型移入 NPU 后重试"
+  }
+]

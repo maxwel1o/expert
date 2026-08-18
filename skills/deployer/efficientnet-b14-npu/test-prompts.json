@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 tf_efficientnetv2_xl.in21k_ft_in1k 模型到 NPU 并执行推理和精度验证",
+        "expected": "完成 CPU/NPU 推理、精度对比，误差 < 1%，输出推理结果和对比报告"
+    },
+    {
+        "id": 2,
+        "prompt": "批量处理 EfficientNet Batch 14 中第 0 到第 5 个模型，串行执行精度验证",
+        "expected": "使用 batch_runner.py 从索引 0 到 5 串行处理，每个模型完成后释放 NPU 显存，精度均 < 1%"
+    },
+    {
+        "id": 3,
+        "prompt": "NPU 不可用时回退 CPU 完成 tf_efficientnet_el.in1k 推理",
+        "expected": "检测 NPU 不可用后自动回退 CPU，输出推理结果并标记 fallback"
+    }
+]

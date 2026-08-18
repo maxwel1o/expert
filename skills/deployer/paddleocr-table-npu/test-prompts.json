@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "应用 paddleocr-table-npu skill,我要在 NPU 上部署 PP-DocLayout_plus-L 版面检测模型。按 skill 文档跑通环境 → 权重 → ONNX → ATC → OM → 推理,给我 13 个 box 输出。",
+    "expected_skill": "paddleocr-table-npu",
+    "expected_actions": [
+      "加载 scripts/model_configs.py 中 doclayout 配置项",
+      "pip install --no-deps paddlepaddle==3.2.2 paddlex[ocr]==3.3.13 paddleocr==3.3.2 paddle2onnx==2.1.0",
+      "paddlex --paddle2onnx 转 ONNX",
+      "auto_optimizer 改图优化",
+      "onnx_staticize_batch 把 batch -> 1",
+      "atc 转 OM(Ascend910B3, 3 输入 im_shape:1,2 / image:1,3,800,800 / scale_factor:1,2)",
+      "python3 scripts/models/doclayout/run_inference.py 跑推理",
+      "输出 13 个 box(labels: text/table/figure_title/paragraph_title)"
+    ],
+    "success_criteria": "NPU 推理成功,13 个 box,score > 0.85"
+  },
+  {
+    "prompt": "应用 PP-OCRv4-seal-det-NPU,部署印章文字检测模型到 910B3。从环境装到跑通,给我 dt_polys + dt_scores。",
+    "expected_skill": "paddleocr-table-npu",
+    "expected_actions": [
+      "加载 seal_det 配置项",
+      "cp predictor.py 到 text_detection/",
+      "paddlex --paddle2onnx",
+      "onnx_staticize_batch + ATC(1 输入 x:1,3,640,640)",
+      "python3 scripts/models/seal_det/run_inference.py",
+      "输出 ~4 个 dt_polys + dt_scores"
+    ],
+    "success_criteria": "NPU 推理成功,dt_polys 4 个,dt_scores > 0.9"
+  },
+  {
+    "prompt": "PP-LCNet_x1_0_table_cls 在 910B3 上做表格分类部署。环境降级、opset 升级、推理跑通,输出 wired_table / wireless_table 的分类结果。",
+    "expected_skill": "paddleocr-table-npu",
+    "expected_actions": [
+      "加载 table_cls 配置项(onnx_upgrade_opset=True)",
+      "cp predictor.py 到 image_classification/",
+      "paddlex --paddle2onnx",
+      "onnx_upgrade_opset(7 -> 11) 升级 opset",
+      "onnx_staticize_batch + ATC(1 输入 x:1,3,224,224)",
+      "python3 scripts/models/table_cls/run_inference.py",
+      "输出 topk class_ids + scores(有线/无线表格)"
+    ],
+    "success_criteria": "NPU 推理成功,top1 = wireless_table(score ~0.81)"
+  },
+  {
+    "prompt": "RT-DETR-L 表格单元检测在 NPU 910B3 上部署。给我 cell box 检测结果。",
+    "expected_skill": "paddleocr-table-npu",
+    "expected_actions": [
+      "加载 table_cell 配置项",
+      "打 paddlex.patch + 2 处 site-packages 适配补丁",
+      "paddlex --paddle2onnx",
+      "onnx_staticize_batch + ATC(3 输入 640x640)",
+      "python3 scripts/models/table_cell/run_inference.py",
+      "输出 ~24 个 cell box"
+    ],
+    "success_criteria": "NPU 推理成功,box label = cell, score > 0.95"
+  }
+]

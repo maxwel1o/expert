@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 wav2vec2-large-xlsr-53-greek 希腊语语音识别模型到昇腾 NPU 并执行推理和精度验证",
+        "expected": "完成 CPU/NPU 推理、精度对比，Argmax 一致率 100%，相对误差 < 1%，输出 OVERALL: PASS"
+    },
+    {
+        "id": 2,
+        "prompt": "使用 transfer_to_npu 自动迁移方式完成 wav2vec2-large-xlsr-53-greek 的 NPU 推理",
+        "expected": "通过 torch_npu.contrib.transfer_to_npu 自动完成 CUDA->NPU 映射，NPU 推理生成 logits_npu.npy，设备标注为 npu:0"
+    },
+    {
+        "id": 3,
+        "prompt": "CANN 环境未加载时自动检测 NPU 不可用，指导用户加载环境后重新检测",
+        "expected": "检测到 NPU 不可用后提示用户 source set_env.sh，指导加载 CANN 环境后重新检测 NPU 状态"
+    }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "single_model_npu_validation",
+    "prompt": "使用 sk-resnet-npu 部署 skresnext50_32x4d.ra_in1k，在 Ascend NPU 上完成 CPU 推理、NPU 推理和精度对比，要求输出 results.tsv、evals.json 和 README 精度结论。"
+  },
+  {
+    "name": "serial_execution_all_models",
+    "prompt": "使用 sk-resnet-npu 串行部署全部三个 SKNet 模型（skresnext50_32x4d, skresnet34, skresnet18），在 Ascend NPU 上依次执行推理、精度对比，每个模型完成后释放 NPU 显存。"
+  },
+  {
+    "name": "npu_fallback_and_publish",
+    "prompt": "使用 skresnet18.ra_in1k 执行部署，模拟 NPU 不可用时 fallback 到 CPU dry-run，生成终端截图后询问用户确认并发布到 GitCode 模型仓库，完成后验证模型页可见 NPU 标签。"
+  }
+]

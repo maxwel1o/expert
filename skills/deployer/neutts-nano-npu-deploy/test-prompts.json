@@ -1,0 +1,65 @@
+{
+  "skill": "neutts-nano-npu-deploy",
+  "test_prompts": [
+    {
+      "id": "tp-001",
+      "prompt": "I want to deploy NeuTTS-Nano English TTS on Ascend NPU for multilingual speech synthesis",
+      "expected_steps": ["环境初始化", "安装依赖", "NPU验证", "模型下载", "基础推理验证"],
+      "min_score": 85
+    },
+    {
+      "id": "tp-002",
+      "prompt": "How do I set up torch_npu for NeuTTS-Nano on Ascend 910 NPU?",
+      "expected_steps": ["环境初始化", "安装依赖", "NPU基础验证"],
+      "min_score": 80
+    },
+    {
+      "id": "tp-003",
+      "prompt": "Run NeuTTS-Nano German TTS inference on NPU with verification",
+      "expected_steps": ["环境初始化", "安装依赖", "NPU验证", "模型下载", "基础推理验证", "精度验证"],
+      "min_score": 85
+    },
+    {
+      "id": "tp-004",
+      "prompt": "Compare CPU vs NPU precision for NeuTTS-Nano French model logits",
+      "expected_steps": ["精度验证", "精度对比", "logit分析"],
+      "min_score": 80
+    },
+    {
+      "id": "tp-005",
+      "prompt": "Fix torch_npu import error when running NeuTTS-Nano inference on Ascend NPU",
+      "expected_steps": ["环境诊断", "CANN环境加载", "torch_npu重装"],
+      "min_score": 75
+    },
+    {
+      "id": "tp-006",
+      "prompt": "Download all 4 NeuTTS-Nano language models (en/de/fr/es) from HuggingFace for NPU deployment",
+      "expected_steps": ["模型下载", "英语模型", "德语模型", "法语模型", "西班牙语模型"],
+      "min_score": 85
+    },
+    {
+      "id": "tp-007",
+      "prompt": "Verify NeuTTS-Nano Spanish TTS output on NPU with accuracy benchmark",
+      "expected_steps": ["环境初始化", "模型下载", "基础推理验证", "精度验证", "基准测试"],
+      "min_score": 85
+    },
+    {
+      "id": "tp-008",
+      "prompt": "Handle OOM error during NeuTTS-Nano NPU inference with long text input",
+      "expected_steps": ["异常诊断", "输入缩短", "NPU显存管理"],
+      "min_score": 70
+    },
+    {
+      "id": "tp-009",
+      "prompt": "Multi-language TTS batch test for NeuTTS-Nano (English, German, French, Spanish) on Ascend NPU",
+      "expected_steps": ["多语言测试", "英语推理", "德语推理", "法语推理", "西班牙语推理", "结果汇总"],
+      "min_score": 90
+    },
+    {
+      "id": "tp-010",
+      "prompt": "Check all checkpoints after NeuTTS-Nano NPU deployment: NPU status, torch_npu import, WAV generation, precision verification",
+      "expected_steps": ["验收确认", "NPU状态检查", "精度验证", "产物归档"],
+      "min_score": 85
+    }
+  ]
+}

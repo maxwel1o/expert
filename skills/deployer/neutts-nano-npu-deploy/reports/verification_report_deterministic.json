@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-05-10 03:43:14",
+  "npu": "Ascend910B4",
+  "tolerance_pct": 1.0,
+  "method": "logit-level comparison (deterministic)",
+  "results": {
+    "neutts-nano": {
+      "max_abs_error": 2.47955322265625e-05,
+      "mean_abs_error": 6.112807568570133e-06,
+      "relative_error_pct": 8.011673399392909e-05,
+      "top1_agreement_pct": 100.0,
+      "top5_overlap_pct": 100.0,
+      "cpu_time_s": 1.891359806060791,
+      "npu_time_s": 0.46880412101745605,
+      "speedup": 4.034435111099132,
+      "passed": true
+    },
+    "neutts-nano-german": {
+      "max_abs_error": 1.621246337890625e-05,
+      "mean_abs_error": 1.68390681665187e-06,
+      "relative_error_pct": 4.54465917082641e-05,
+      "top1_agreement_pct": 100.0,
+      "top5_overlap_pct": 100.0,
+      "cpu_time_s": 1.8567898273468018,
+      "npu_time_s": 0.04332447052001953,
+      "speedup": 42.85776156199784,
+      "passed": true
+    },
+    "neutts-nano-french": {
+      "max_abs_error": 1.621246337890625e-05,
+      "mean_abs_error": 3.349407506902935e-06,
+      "relative_error_pct": 6.772668239948797e-05,
+      "top1_agreement_pct": 100.0,
+      "top5_overlap_pct": 100.0,
+      "cpu_time_s": 2.0567314624786377,
+      "npu_time_s": 0.05057239532470703,
+      "speedup": 40.669053725320104,
+      "passed": true
+    },
+    "neutts-nano-spanish": {
+      "max_abs_error": 2.384185791015625e-05,
+      "mean_abs_error": 3.0850260372972116e-06,
+      "relative_error_pct": 6.761493852589271e-05,
+      "top1_agreement_pct": 100.0,
+      "top5_overlap_pct": 100.0,
+      "cpu_time_s": 1.8685150146484375,
+      "npu_time_s": 0.0871269702911377,
+      "speedup": 21.44588533728112,
+      "passed": true
+    }
+  },
+  "all_pass": true
+}

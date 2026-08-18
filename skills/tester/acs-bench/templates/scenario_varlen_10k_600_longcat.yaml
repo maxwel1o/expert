@@ -1,0 +1,33 @@
+# 混长场景：avg输入10240, 输出600
+# 模型: LongCat-Flash-Chat
+# 数据集: data_n3838_avg11944_cut_keep_max_n_n2699_avg10240 (保序, 2699条)
+
+dataset_type: varlen
+dataset: data_n3838_avg11944_cut_keep_max_n_n2699_avg10240
+num_requests: 2699
+output_length: 600
+ignore_eos: False
+
+tokenizer: $PROF_ROOT/models/LongCat-Flash-Chat
+trust_remote_code: True
+provider: ./conf/provider_longcat.yaml
+
+recommended:
+  # 基于2026-05-12实测
+  e2e_le_4_5s:  # e2e≤4.5s最优
+    concurrency: 170
+    request_rate: 33
+    expected_qps: 28.6
+    expected_e2e: 4.3s
+  qps_28:  # ≈1700RPM
+    concurrency: 170
+    request_rate: 32
+    expected_qps: 28.1
+    expected_e2e: 4.4s
+  throughput_priority:  # QPS优先
+    concurrency: 200
+    request_rate: 35
+    expected_qps: 30.1
+    expected_e2e: 4.7s
+
+# QPS天花板: ~31.8 (≈1908 RPM) at c=600/r=50, e2e=9.3s

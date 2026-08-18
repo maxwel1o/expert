@@ -1,0 +1,36 @@
+[
+  {
+    "prompt": "在昇腾 NPU 上部署 PP-OCRv4 文字检测模型并验证精度",
+    "expected_skill": "pp-ocrv4-npu-deploy",
+    "expected_actions": [
+      "安装 onnxruntime-cann、numpy、opencv-python、modelscope",
+      "从 ModelScope 下载 ch_PP-OCRv4_det_infer ONNX 模型",
+      "使用 CANNExecutionProvider 执行 NPU 推理",
+      "CPU 推理对比，计算余弦相似度和 SNR",
+      "确认余弦相似度 > 0.999，SNR > 25 dB"
+    ],
+    "success_criteria": "NPU 推理成功，输出 shape 正确，余弦相似度 > 0.999"
+  },
+  {
+    "prompt": "帮我批量执行全部 10 个 PP-OCRv4 模型的 NPU 部署和精度验证",
+    "expected_skill": "pp-ocrv4-npu-deploy",
+    "expected_actions": [
+      "执行 scripts/run_all_models.sh 串行处理每个模型",
+      "每个模型：下载→ONNX推理→精度对比→README生成→显存释放",
+      "生成所有模型的 comparison_report.json",
+      "汇总精度对比结果表格"
+    ],
+    "success_criteria": "所有兼容模型余弦相似度 > 0.999，不兼容模型记录失败原因"
+  },
+  {
+    "prompt": "PP-OCRv4 的 CANN 编译失败怎么办",
+    "expected_skill": "pp-ocrv4-npu-deploy",
+    "expected_actions": [
+      "查看异常处理与回滚策略章节",
+      "检查 ONNX opset 版本（opset 7 可能不兼容）",
+      "使用 paddle2onnx 重新导出 ONNX 模型（更高 opset）",
+      "如仍失败，标记该模型并继续处理下一个"
+    ],
+    "success_criteria": "定位 CANN 编译失败原因，输出不兼容模型列表"
+  }
+]

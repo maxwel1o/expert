@@ -1,0 +1,27 @@
+{
+  "name": "xcit-npu-deploy",
+  "description": "XCiT 系列图像分类模型在昇腾 NPU 上的完整部署、推理、精度对比、文档生成与模型仓库发布 Skill。支持 timm 库的 5 个 XCiT 变体模型的串行适配，自动完成 CPU/NPU 精度验证（误差 < 1%）、终端截图生成、README 编写和 GitCode 模型仓库推送。",
+  "metadata": {
+    "short-description": "XCiT 昇腾 NPU 部署与精度验证",
+    "category": "NPU-Model-Deploy",
+    "tags": [
+      "ascend", "npu", "xcit", "timm", "pytorch",
+      "image-classification", "inference", "precision-validation",
+      "model-deploy", "#+NPU", "#+CV", "#+昇腾"
+    ],
+    "supported-models": [
+      "xcit_tiny_12_p16_384.fb_dist_in1k",
+      "xcit_large_24_p8_224.fb_in1k",
+      "xcit_medium_24_p16_384.fb_dist_in1k",
+      "xcit_tiny_12_p8_384.fb_dist_in1k",
+      "xcit_small_12_p8_224.fb_in1k"
+    ],
+    "model-repos": {
+      "xcit_tiny_12_p16_384": "https://gitcode.com/gcw_C8PI9e90/xcit_tiny_12_p16_384-npu",
+      "xcit_large_24_p8_224": "https://gitcode.com/gcw_C8PI9e90/xcit_large_24_p8_224-npu",
+      "xcit_medium_24_p16_384": "https://gitcode.com/gcw_C8PI9e90/xcit_medium_24_p16_384-npu",
+      "xcit_tiny_12_p8_384": "https://gitcode.com/gcw_C8PI9e90/xcit_tiny_12_p8_384-npu",
+      "xcit_small_12_p8_224": "https://gitcode.com/gcw_C8PI9e90/xcit_small_12_p8_224-npu"
+    }
+  }
+}

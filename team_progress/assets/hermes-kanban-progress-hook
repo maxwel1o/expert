@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+export PYTHONPATH="/opt/data/team-progress/lib"
+export TEAM_PROGRESS_DB="/opt/data/team-progress/state/progress.db"
+export TEAM_PROGRESS_HERMES_DB="/opt/data/kanban.db"
+exec python3 -m team_progress.hooks.hermes_kanban

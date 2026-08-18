@@ -1,0 +1,30 @@
+{
+  "name": "senet-npu",
+  "description": "SE-Net 系列模型昇腾 NPU 部署与精度验证 Skill",
+  "version": "1.0.0",
+  "type": "deployment",
+  "models": [
+    "seresnet50.a1_in1k",
+    "seresnet50.ra2_in1k",
+    "seresnet50.a3_in1k",
+    "seresnet50.a2_in1k",
+    "seresnet33ts.ra2_in1k",
+    "seresnet152d.ra2_in1k",
+    "senet154.gluon_in1k",
+    "sehalonet33ts.ra2_in1k",
+    "sebotnet33ts_256.a1h_in1k"
+  ],
+  "dependencies": {
+    "python": ">=3.10",
+    "packages": [
+      "torch>=2.0.0",
+      "torchvision>=0.15.0",
+      "timm>=0.9.0",
+      "Pillow>=10.0.0"
+    ]
+  },
+  "hardware": "Ascend 910B / 910",
+  "frameworks": ["PyTorch", "torch_npu", "timm"],
+  "repository": "https://gitcode.com/m0_74196153/model-agent",
+  "license": "MIT"
+}

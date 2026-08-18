@@ -1,0 +1,14 @@
+[
+  {
+    "name": "full_npu_deployment_validation",
+    "prompt": "使用 vit-base-patch16-224-in21k-npu 部署 google/vit-base-patch16-224-in21k 在 Ascend NPU 上，依次完成环境初始化、模型权重下载、CPU 推理、NPU 推理和精度对比验证，输出 evals.json 和精度结论。"
+  },
+  {
+    "name": "performance_benchmark",
+    "prompt": "使用 vit-base-patch16-224-in21k-npu 在 Ascend NPU 上运行 google/vit-base-patch16-224-in21k 的性能基准测试，测量 CPU 单图延迟、NPU batch=1/4/8 延迟，计算加速比，输出 benchmark_report.json。"
+  },
+  {
+    "name": "npu_fallback_accuracy_check",
+    "prompt": "使用 vit-base-patch16-224-in21k-npu 部署 google/vit-base-patch16-224-in21k，模拟 NPU 不可用时 fallback 到 CPU dry-run 模式，对比 transfer_to_npu 注入前后的推理结果一致性，验证精度误差 < 1%。"
+  }
+]

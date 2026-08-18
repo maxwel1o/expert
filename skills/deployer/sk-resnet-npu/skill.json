@@ -1,0 +1,46 @@
+{
+  "name": "sk-resnet-npu",
+  "description": "SKNet (Selective Kernel Networks) 系列模型在昇腾 NPU 上的部署、推理、精度验证与模型仓库发布 Skill。支持 skresnext50_32x4d, skresnet34, skresnet18 三个模型的串行适配。",
+  "version": "1.0.0",
+  "type": "deployment",
+  "author": "m0_74196153",
+  "license": "MIT",
+  "hardware": ["Ascend910"],
+  "frameworks": ["PyTorch", "torch_npu"],
+  "tags": ["NPU", "昇腾", "timm", "图像分类", "SKNet"],
+  "models": [
+    "skresnext50_32x4d.ra_in1k",
+    "skresnet34.ra_in1k",
+    "skresnet18.ra_in1k"
+  ],
+  "inputs": {
+    "model_name": {
+      "type": "string",
+      "description": "timm 模型名称",
+      "required": true,
+      "enum": [
+        "skresnext50_32x4d.ra_in1k",
+        "skresnet34.ra_in1k",
+        "skresnet18.ra_in1k"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "description": "执行的操作",
+      "required": false,
+      "default": "all",
+      "enum": ["inference", "compare", "readme", "screenshot", "publish", "all"]
+    }
+  },
+  "outputs": {
+    "inference_result": "CPU/NPU 推理结果 JSON",
+    "compare_result": "CPU/NPU 精度对比结果 JSON",
+    "screenshot": "终端模拟截图 PNG",
+    "repo_url": "GitCode 模型仓库地址"
+  },
+  "repository_urls": {
+    "skresnext50_32x4d.ra_in1k": "https://gitcode.com/m0_74196153/skresnext50_32x4d.ra_in1k-npu",
+    "skresnet34.ra_in1k": "https://gitcode.com/m0_74196153/skresnet34.ra_in1k-npu",
+    "skresnet18.ra_in1k": "https://gitcode.com/m0_74196153/skresnet18.ra_in1k-npu"
+  }
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 spnasnet_100.rmsp_in1k 模型到 NPU 并执行推理验证精度",
+        "expected": "完成 CPU/NPU 推理、精度对比、误差 < 1%，输出推理结果和对比报告"
+    },
+    {
+        "id": 2,
+        "prompt": "在 NPU 不可用时回退到 CPU 完成 spnasnet_100.rmsp_in1k 推理和精度验证",
+        "expected": "检测到 NPU 不可用后自动回退 CPU，输出推理结果并标记 fallback"
+    },
+    {
+        "id": 3,
+        "prompt": "从 ModelScope 下载 spnasnet_100.rmsp_in1k 模型然后执行 NPU 推理",
+        "expected": "成功从 modelscope 下载模型权重，加载到 NPU 设备完成推理"
+    }
+]

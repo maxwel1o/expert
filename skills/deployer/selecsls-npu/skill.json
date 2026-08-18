@@ -1,0 +1,46 @@
+{
+  "name": "selecsls",
+  "description": "SelecSLS 系列图像分类模型 (selecsls60b, selecsls60, selecsls42b) 在昇腾 NPU 上的部署、推理、精度验证、文档生成与模型仓库发布一站式工具",
+  "version": "1.0.0",
+  "type": "deployment",
+  "models": [
+    {
+      "name": "selecsls60b.in1k",
+      "repo": "https://gitcode.com/m0_74196153/selecsls60b-npu",
+      "description": "SelecSLS-60B 图像分类模型 (32.8M params)"
+    },
+    {
+      "name": "selecsls60.in1k",
+      "repo": "https://gitcode.com/m0_74196153/selecsls60-npu",
+      "description": "SelecSLS-60 图像分类模型 (30.7M params)"
+    },
+    {
+      "name": "selecsls42b.in1k",
+      "repo": "https://gitcode.com/m0_74196153/selecsls42b-npu",
+      "description": "SelecSLS-42B 图像分类模型 (32.5M params)"
+    }
+  ],
+  "parameters": {
+    "model": {
+      "type": "string",
+      "description": "模型名称，可选: selecsls60b.in1k, selecsls60.in1k, selecsls42b.in1k",
+      "required": true
+    },
+    "device": {
+      "type": "string",
+      "description": "运行设备: cpu 或 npu",
+      "default": "npu"
+    },
+    "image": {
+      "type": "string",
+      "description": "测试图像路径",
+      "default": "test_image.jpg"
+    }
+  },
+  "outputs": {
+    "inference_results": "CPU/NPU 推理结果 JSON",
+    "comparison_results": "CPU/NPU 精度对比结果 JSON",
+    "terminal_screenshot": "模拟终端输出截图 PNG",
+    "readme": "模型中文文档 README.md"
+  }
+}

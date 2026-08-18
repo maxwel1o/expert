@@ -1,0 +1,48 @@
+{
+  "skill": "mobilevit-npu",
+  "description": "Apple MobileViT 系列图像分类模型 NPU 部署精度与性能测试用例",
+  "test_cases": [
+    {
+      "id": "mobilevit-small",
+      "model": "apple/mobilevit-small",
+      "prompts": [],
+      "images": ["test_image.jpg"],
+      "params": {
+        "top_k": 5,
+        "image_size": [256, 256]
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "max_prob_diff": 0.01
+      }
+    },
+    {
+      "id": "mobilevit-x-small",
+      "model": "apple/mobilevit-x-small",
+      "prompts": [],
+      "images": ["test_image.jpg"],
+      "params": {
+        "top_k": 5,
+        "image_size": [256, 256]
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "max_prob_diff": 0.01
+      }
+    },
+    {
+      "id": "mobilevit-xx-small",
+      "model": "apple/mobilevit-xx-small",
+      "prompts": [],
+      "images": ["test_image.jpg"],
+      "params": {
+        "top_k": 5,
+        "image_size": [256, 256]
+      },
+      "threshold": {
+        "cosine_similarity": 0.999,
+        "max_prob_diff": 0.01
+      }
+    }
+  ]
+}

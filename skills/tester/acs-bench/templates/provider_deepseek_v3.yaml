@@ -1,0 +1,15 @@
+# ============================================================
+# Provider 配置 — DeepSeek V3-0324 on ModelArts MaaS 推理服务
+# ============================================================
+# ⚠️ 修改 api_key 和 model_name 后再执行压测
+# ⚠️ 此文件包含敏感信息，不要提交到版本控制
+# ⚠️ Tokenizer: $PROF_ROOT/models/DeepSeek-V3-0324
+# ⚠️ Vocab size: 128000, Max length: 131072
+
+providers:
+  - id: 'mt_test'
+    name: 'deepseek-v3'
+    api_key: '<YOUR_API_KEY>'
+    base_url: 'https://api.modelarts-maas.com/v1'
+    model_name: '<YOUR_MODEL_ID>'
+    # model_category: 'DeepSeek-V3'

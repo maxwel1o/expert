@@ -1,0 +1,97 @@
+# acs-bench 测试用例
+# 从 skill-authoring/templates/test-cases-scaffold.md 创建
+
+test_cases:
+  # ─── 触发场景测试 ───
+  - test_id: TRG-001
+    name: 压测指令触发acs-bench加载
+    type: trigger
+    trigger_condition: 用户消息包含"压测""prof""benchmark""acs-bench"关键词
+    preconditions: skill已安装
+    steps:
+      - 发送"执行压测"指令
+      - 检查agent是否加载acs-bench skill
+    expected_result: agent加载acs-bench并按workflow执行
+    actual_result:
+    status: pass
+
+  - test_id: TRG-002
+    name: 非压测指令不触发
+    type: trigger
+    trigger_condition: 用户消息不包含压测相关关键词
+    preconditions: 无
+    steps:
+      - 发送"查看磁盘"指令
+      - 检查agent是否加载acs-bench
+    expected_result: agent不加载acs-bench
+    actual_result:
+    status: pass
+
+  # ─── Workflow阶段测试 ───
+  - test_id: WFS-001
+    name: 环境变量从USER profile解析
+    type: workflow_step
+    trigger_condition: 执行acs-bench workflow
+    preconditions: USER profile含PROF_ROOT/CONDA_ENV/DATA_ROOT映射
+    steps:
+      - 读取USER profile中PROF_ROOT/CONDA_ENV/DATA_ROOT
+      - 验证SKILL.md中使用$VAR而非硬编码
+      - 执行conda activate $CONDA_ENV
+    expected_result: 环境变量正确解析，conda环境激活成功
+    actual_result:
+    status: pass
+
+  - test_id: WFS-002
+    name: archive目录不参与sync对比
+    type: workflow_step
+    trigger_condition: 执行sync-merge-skills
+    preconditions: 本地references/archive/有内容
+    steps:
+      - 执行 python3 skills0-dev/software-development/agent-skill-commit/scripts/sync-merge-skills.py plan acs-bench
+      - 检查输出中无archive路径（脚本内is_archive_path排除）
+    expected_result: archive文件不出现在融合计划中
+    actual_result:
+    status: pass
+
+  - test_id: WFS-003
+    name: 融合同步非覆盖
+    type: workflow_step
+    trigger_condition: 执行sync-merge-skills
+    preconditions: 本地修改了SKILL.md，仓库有其他未修改文件
+    steps:
+      - 执行 python3 skills0-dev/software-development/agent-skill-commit/scripts/sync-merge-skills.py plan acs-bench
+      - 确认unchanged文件status=skip
+      - 确认modified文件status=merge(有tests)或need_test(无tests)
+      - 执行 python3 skills0-dev/software-development/agent-skill-commit/scripts/sync-merge-skills.py execute acs-bench
+      - 验证仓库中未修改文件保留
+    expected_result: 仅修改文件被更新，未修改文件保留原样
+    actual_result:
+    status: pass
+
+  # ─── 修改点回归测试 ───
+  - test_id: REG-001
+    name: 脱敏后$CONDA_ENV可正确解析
+    type: regression
+    trigger_condition: SKILL.md中conda命令使用$CONDA_ENV
+    preconditions: USER profile有CONDA_ENV定义
+    steps:
+      - grep SKILL.md确认无硬编码conda环境名
+      - 模拟解析$CONDA_ENV→实际值
+      - 验证conda activate $CONDA_ENV可执行
+    expected_result: $CONDA_ENV正确解析为实际值
+    actual_result:
+    status: pass
+
+  - test_id: REG-002
+    name: archive内容不丢失
+    type: regression
+    trigger_condition: sync后检查archive
+    preconditions: 本地references/archive/有历史数据
+    steps:
+      - 记录sync前archive文件列表
+      - 执行sync-merge-skills
+      - 检查本地archive文件仍存在
+      - 检查仓库archive文件未被修改
+    expected_result: archive内容完整保留
+    actual_result:
+    status: pass

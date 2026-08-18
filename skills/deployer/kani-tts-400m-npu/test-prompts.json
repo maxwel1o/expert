@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "I want to deploy KaniTTS on Ascend NPU for TTS",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "intent"
+  },
+  {
+    "prompt": "How do I run KaniTTS inference on NPU?",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "usage"
+  },
+  {
+    "prompt": "Set up KaniTTS 400M English model on Ascend 910B4",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "setup"
+  },
+  {
+    "prompt": "Compare NPU vs CPU accuracy for KaniTTS",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "evaluation"
+  },
+  {
+    "prompt": "KaniTTS NPU error LFM2 model loading failed",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "Download KaniTTS models from HuggingFace mirror",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "setup"
+  },
+  {
+    "prompt": "Run KaniTTS with speaker ID on NPU",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "usage"
+  },
+  {
+    "prompt": "KaniTTS NanoCodec CPU decoding setup",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "setup"
+  },
+  {
+    "prompt": "Fix nemo_toolkit not found for KaniTTS",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "KaniTTS output audio is silent on NPU",
+    "expected_skill": "kani-tts-400m-npu",
+    "category": "troubleshooting"
+  }
+]

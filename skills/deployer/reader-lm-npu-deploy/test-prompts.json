@@ -1,0 +1,14 @@
+[
+  {
+    "name": "full_deployment_0.5b",
+    "prompt": "使用 reader-lm-npu-deploy 部署 reader-lm-0.5b 模型到 Ascend 910B1 NPU，完成环境预检、模型下载、Dummy 加载验证、真实权重服务启动、推理验证、CPU/NPU 精度对比和性能基准测试，确保 8 步工作流和检查点 CP-1 到 CP-8 全部执行。"
+  },
+  {
+    "name": "accuracy_comparison",
+    "prompt": "对 reader-lm-1.5b 执行 NPU vs CPU 精度对比，使用 accuracy_benchmark.py 验证 3 个测试 prompt 的语义匹配率是否为 100%，记录精确字符串匹配率和 NPU/CPU 加速比，确认 bfloat16 NPU 与 float32 CPU 的精度误差 < 1%。"
+  },
+  {
+    "name": "error_recovery",
+    "prompt": "在 reader-lm-0.5b 部署过程中模拟 NPU 不可用场景（npu-smi info 无输出），验证异常处理矩阵中的 fallback 到 CPU dry-run 模式是否生效，检查 evals.json 是否正确记录 npu_unavailable 标记。"
+  }
+]

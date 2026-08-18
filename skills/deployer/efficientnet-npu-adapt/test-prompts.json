@@ -1,0 +1,67 @@
+[
+  {
+    "prompt": "我需要将 EfficientNet-B0 模型适配到华为昇腾 NPU（Ascend 910）上进行推理验证。请帮我完成以下步骤：1）安装依赖并检测 NPU 环境 2）完成模型推理测试 3）与 CPU 进行精度对比验证 4）生成适配验证报告。PyTorch 2.9.0，torch_npu 2.9.0.post1，环境已配置。",
+    "expected_output": {
+      "actions": [
+        "检测 torch.npu.is_available() 确认 NPU 可用",
+        "使用 PyTorch Vision 预训练 efficientnet_b0 权重",
+        "在 NPU(FP32) 上进行推理并记录 Top-5 预测结果",
+        "执行 accuracy_run.py 进行 5 组随机种子精度对比",
+        "生成 accuracy_report.json 和 readme.md"
+      ],
+      "artifacts": [
+        "efficientnet_b0-npu/inference.py",
+        "efficientnet_b0-npu/accuracy_run.py",
+        "efficientnet_b0-npu/accuracy_report.json",
+        "efficientnet_b0-npu/readme.md"
+      ],
+      "quality_gates": {
+        "cosine_similarity": "> 0.99999",
+        "max_abs_error": "< 0.005",
+        "top1_match": "100%"
+      }
+    }
+  },
+  {
+    "prompt": "我需要为 EfficientNet 全系列（B0-B6）收集性能基准数据，测试不同 batch size（1, 2, 4, 8, 16, 32）下的延迟和吞吐量。NPU 环境是 Ascend 910，FP32 精度。部分大模型（B5/B6）在 batch size 较大时可能 OOM，需要处理这种异常。",
+    "expected_output": {
+      "actions": [
+        "对每个模型依次执行 accuracy_run_perf.py",
+        "测试 batch size 1, 2, 4, 8, 16, 32 共 6 种配置",
+        "OOM 时自动减小 batch_size 重试（最多 3 次），最小支持 bs=1",
+        "将结果保存到 perf_report.json"
+      ],
+      "artifacts": [
+        "efficientnet_b0-npu/perf_report.json",
+        "efficientnet_b6-npu/perf_report.json",
+        "execution.log"
+      ],
+      "error_handling": {
+        "oom_retry": "batch_size 减半重试最多 3 次",
+        "perf_anomaly": "重新测试 3 次取中位数",
+        "max_batch_size": "记录每个模型可用的最大 batch_size"
+      }
+    }
+  },
+  {
+    "prompt": "我在 EfficientNet-B4 的 NPU 适配过程中发现精度对比结果异常，余弦相似度只有 0.9998，虽然仍高于 0.999 阈值，但低于其他模型的 0.99999。请帮我排查可能的原因并提供改进方案。环境：PyTorch 2.9.0, torch_npu 2.9.0.post1, Ascend 910。",
+    "expected_output": {
+      "analysis": [
+        "检查 CPU 与 NPU 的输入数据预处理是否一致（随机种子、张量生成方式）",
+        "检查模型加载方式是否一致（eval 模式、权重初始化）",
+        "检查 NPU 推理是否意外开启了混合精度或推理模式差异",
+        "对比 5 组不同随机种子结果的稳定性"
+      ],
+      "actions": [
+        "输出逐样本误差分布报告到 accuracy_issue.log",
+        "增加测试样本组数到 10 组以确认统计显著性",
+        "在纯 FP32 模式下重测，排除精度模式干扰",
+        "生成更新后的精度报告和说明文档"
+      ],
+      "artifacts": [
+        "efficientnet_b4-npu/accuracy_issue.log",
+        "efficientnet_b4-npu/accuracy_report.json（更新版）"
+      ]
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 volo_d2_224.sail_in1k 模型到 NPU 并执行推理和精度验证",
+        "expected": "完成 CPU/NPU 推理、精度对比，误差 < 1%，输出推理结果和对比报告"
+    },
+    {
+        "id": 2,
+        "prompt": "串行处理所有 11 个 VOLO 模型的精度验证",
+        "expected": "11 个模型依次串行执行，每个完成后释放资源，精度均 < 1%，汇总到 evals.json"
+    },
+    {
+        "id": 3,
+        "prompt": "NPU 不可用时回退到 CPU 完成 volo_d5_512.sail_in1k 推理",
+        "expected": "检测到 NPU 不可用后自动回退 CPU，输出推理结果并标记 fallback"
+    },
+    {
+        "id": 4,
+        "prompt": "使用 timm 框架加载 volo_d3_448.sail_in1k 并从 ModelScope 下载权重",
+        "expected": "从 ModelScope 缓存加载 safetensors，使用 strict=False 处理 module. 前缀，完成推理"
+    }
+]

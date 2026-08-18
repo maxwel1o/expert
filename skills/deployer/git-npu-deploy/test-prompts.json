@@ -1,0 +1,32 @@
+[
+    {
+        "id": "git-env",
+        "name": "NPU 环境预检验证",
+        "prompt": "检查昇腾 NPU 环境是否就绪，加载 CANN 并验证 torch_npu",
+        "expected": "npu-smi info 显示设备正常，torch.npu.is_available() 返回 True"
+    },
+    {
+        "id": "git-download",
+        "name": "模型下载验证",
+        "prompt": "使用 hf-mirror.com 镜像下载 microsoft/git-large 模型",
+        "expected": "下载配置文件、tokenizer 文件、权重文件到本地目录"
+    },
+    {
+        "id": "git-inference",
+        "name": "单图推理验证",
+        "prompt": "在昇腾 NPU 上运行 GIT 图像描述推理",
+        "expected": "输出合理的图像描述文本，无 torch_npu 报错"
+    },
+    {
+        "id": "git-accuracy",
+        "name": "精度评测验证",
+        "prompt": "运行精度评测脚本对比 NPU 和 CPU 推理结果",
+        "expected": "文本一致率达到 100%（5/5），Encoder 差异在浮点误差范围内"
+    },
+    {
+        "id": "git-benchmark",
+        "name": "性能基准测试",
+        "prompt": "运行性能基准测试验证 NPU 推理耗时",
+        "expected": "NPU 推理耗时 < CPU 推理耗时，加速比约 3-4x"
+    }
+]

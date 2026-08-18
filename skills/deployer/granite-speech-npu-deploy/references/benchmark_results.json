@@ -1,0 +1,140 @@
+{
+  "npu_info": {
+    "npu_count": 1,
+    "npu_name": "Ascend910B4",
+    "npu_memory": 31662800896,
+    "npu_smi": "+------------------------------------------------------------------------------------------------+\n| npu-smi 25.5.1                   Version: 25.5.1                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 95.9        41                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          3117 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| 7       0                 | 61861         | python3                  | 110                     |\n| 7       0                 | 59325         | python3                  | 238                     |\n+===========================+===============+====================================================+\n"
+  },
+  "granite-speech-4.1-2b": {
+    "forward": {
+      "32": {
+        "avg_ms": 134.01,
+        "median_ms": 131.61,
+        "p99_ms": 167.6,
+        "std_ms": 9.13,
+        "tokens_per_sec": 238.78,
+        "output_logits_shape": [
+          1,
+          32,
+          100353
+        ]
+      },
+      "64": {
+        "avg_ms": 139.03,
+        "median_ms": 136.05,
+        "p99_ms": 164.99,
+        "std_ms": 10.13,
+        "tokens_per_sec": 460.32,
+        "output_logits_shape": [
+          1,
+          64,
+          100353
+        ]
+      },
+      "128": {
+        "avg_ms": 136.33,
+        "median_ms": 134.23,
+        "p99_ms": 160.79,
+        "std_ms": 6.98,
+        "tokens_per_sec": 938.89,
+        "output_logits_shape": [
+          1,
+          128,
+          100353
+        ]
+      }
+    },
+    "generate": {
+      "in32_out32": {
+        "total_time_s": 2.675,
+        "output_tokens": 32,
+        "tokens_per_sec": 11.96
+      },
+      "in32_out64": {
+        "total_time_s": 0.137,
+        "output_tokens": 1,
+        "tokens_per_sec": 7.32
+      },
+      "in64_out32": {
+        "total_time_s": 0.144,
+        "output_tokens": 1,
+        "tokens_per_sec": 6.92
+      },
+      "in64_out64": {
+        "total_time_s": 0.135,
+        "output_tokens": 1,
+        "tokens_per_sec": 7.38
+      }
+    },
+    "memory": {
+      "allocated_mb": 4412.86,
+      "reserved_mb": 4538.0
+    }
+  },
+  "granite-speech-4.1-2b-plus": {
+    "forward": {
+      "32": {
+        "avg_ms": 330.29,
+        "median_ms": 146.58,
+        "p99_ms": 1195.38,
+        "std_ms": 313.28,
+        "tokens_per_sec": 96.88,
+        "output_logits_shape": [
+          1,
+          32,
+          100353
+        ]
+      },
+      "64": {
+        "avg_ms": 134.99,
+        "median_ms": 133.71,
+        "p99_ms": 148.96,
+        "std_ms": 4.62,
+        "tokens_per_sec": 474.11,
+        "output_logits_shape": [
+          1,
+          64,
+          100353
+        ]
+      },
+      "128": {
+        "avg_ms": 139.29,
+        "median_ms": 134.73,
+        "p99_ms": 198.26,
+        "std_ms": 15.75,
+        "tokens_per_sec": 918.97,
+        "output_logits_shape": [
+          1,
+          128,
+          100353
+        ]
+      }
+    },
+    "generate": {
+      "in32_out32": {
+        "total_time_s": 0.134,
+        "output_tokens": 1,
+        "tokens_per_sec": 7.47
+      },
+      "in32_out64": {
+        "total_time_s": 12.62,
+        "output_tokens": 64,
+        "tokens_per_sec": 5.07
+      },
+      "in64_out32": {
+        "total_time_s": 0.288,
+        "output_tokens": 3,
+        "tokens_per_sec": 10.41
+      },
+      "in64_out64": {
+        "total_time_s": 0.137,
+        "output_tokens": 1,
+        "tokens_per_sec": 7.29
+      }
+    },
+    "memory": {
+      "allocated_mb": 4028.86,
+      "reserved_mb": 8480.0
+    }
+  }
+}

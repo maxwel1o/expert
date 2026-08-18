@@ -1,0 +1,14 @@
+[
+  {
+    "name": "full_deployment_workflow",
+    "prompt": "使用 vit_base_patch16_224-dino-npu-deploy 完成 DINO ViT-B/16 在 Ascend910 NPU 上的完整部署和推理验证，包括环境准备、模型加载、合成数据推理、CPU/NPU 精度对比和性能基准测试。"
+  },
+  {
+    "name": "real_image_inference",
+    "prompt": "使用 inference.py 对真实图片进行 NPU 推理，检查特征向量 shape 和 feature norm，确认 CPU/NPU 精度一致性。"
+  },
+  {
+    "name": "benchmark_and_checkpoint",
+    "prompt": "运行 eval_benchmark.py 完成 DINO ViT-B/16 的精度对比和性能基准测试，在发布前执行用户确认检查点，确认 eval_report.json 正常生成。"
+  }
+]

@@ -1,0 +1,27 @@
+============================================================
+  plant-classify-densenet121 - Ascend NPU Inference
+============================================================
+
+  >>> Running CPU inference...
+  [CPU] Inference time: 1367.35 ms
+
+  >>> Running NPU inference...
+  [INFO] Loading model to npu:0...
+  [NPU] Inference time: 13.29 ms
+
+============================================================
+  RESULTS - CPU vs NPU Precision Comparison
+============================================================
+  Max Absolute Error (prob):  5.08e-05
+  Mean Absolute Error (prob):  9.84e-06
+  Max Relative Error:          1.22e-03
+  Cosine Similarity:           1.0000001192
+  Top-1 Consistency:           100.00%
+  Top-5 Consistency:           100.00%
+  CPU Inference Time:          1367.35 ms
+  NPU Inference Time:          13.29 ms
+  Speedup (NPU/CPU):           102.91x
+============================================================
+  [PASS] NPU vs CPU Max Relative Error = 1.22e-03 < 1%
+  [PASS] 精度满足要求！
+============================================================

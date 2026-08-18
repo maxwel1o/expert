@@ -1,0 +1,149 @@
+{
+    "input_path": "/workspace/PP-DocLayout_plus-L-sact/test_Doclayout_plus.png",
+    "page_index": null,
+    "boxes": [
+        {
+            "cls_id": 2,
+            "label": "text",
+            "score": 0.98681640625,
+            "coordinate": [
+                33.78125,
+                349.75,
+                358.5,
+                610.5
+            ]
+        },
+        {
+            "cls_id": 2,
+            "label": "text",
+            "score": 0.98681640625,
+            "coordinate": [
+                34.125,
+                647.0,
+                358.5,
+                849.0
+            ]
+        },
+        {
+            "cls_id": 2,
+            "label": "text",
+            "score": 0.98486328125,
+            "coordinate": [
+                385.5,
+                497.5,
+                711.5,
+                697.5
+            ]
+        },
+        {
+            "cls_id": 8,
+            "label": "table",
+            "score": 0.98388671875,
+            "coordinate": [
+                74.0625,
+                105.9375,
+                322.0,
+                298.5
+            ]
+        },
+        {
+            "cls_id": 8,
+            "label": "table",
+            "score": 0.9833984375,
+            "coordinate": [
+                437.25,
+                105.8125,
+                663.0,
+                313.5
+            ]
+        },
+        {
+            "cls_id": 2,
+            "label": "text",
+            "score": 0.98291015625,
+            "coordinate": [
+                385.25,
+                346.25,
+                710.5,
+                458.75
+            ]
+        },
+        {
+            "cls_id": 2,
+            "label": "text",
+            "score": 0.9814453125,
+            "coordinate": [
+                386.0,
+                735.0,
+                711.0,
+                850.0
+            ]
+        },
+        {
+            "cls_id": 6,
+            "label": "figure_title",
+            "score": 0.95751953125,
+            "coordinate": [
+                34.40625,
+                20.015625,
+                358.75,
+                76.5625
+            ]
+        },
+        {
+            "cls_id": 6,
+            "label": "figure_title",
+            "score": 0.95068359375,
+            "coordinate": [
+                385.5,
+                20.09375,
+                711.5,
+                74.875
+            ]
+        },
+        {
+            "cls_id": 0,
+            "label": "paragraph_title",
+            "score": 0.90087890625,
+            "coordinate": [
+                386.75,
+                477.25,
+                700.0,
+                490.0
+            ]
+        },
+        {
+            "cls_id": 0,
+            "label": "paragraph_title",
+            "score": 0.88427734375,
+            "coordinate": [
+                387.5,
+                716.5,
+                524.5,
+                729.0
+            ]
+        },
+        {
+            "cls_id": 0,
+            "label": "paragraph_title",
+            "score": 0.88330078125,
+            "coordinate": [
+                35.5,
+                628.0,
+                185.75,
+                640.5
+            ]
+        },
+        {
+            "cls_id": 0,
+            "label": "paragraph_title",
+            "score": 0.8505859375,
+            "coordinate": [
+                35.5,
+                331.25,
+                141.75,
+                344.75
+            ]
+        }
+    ]
+}

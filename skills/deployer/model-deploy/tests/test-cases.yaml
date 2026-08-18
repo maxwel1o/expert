@@ -1,0 +1,74 @@
+# Test Cases for model-deploy skill
+# Generated during authoring review
+
+test_cases:
+  - id: TC01
+    name: "frontmatter完整性"
+    category: structural
+    status: pass
+    description: "SKILL.md frontmatter包含name/description/version/author/license/metadata"
+    preconditions:
+      - "SKILL.md文件存在"
+    steps:
+      - "读取SKILL.md frontmatter"
+      - "验证name/description/version/author/license/metadata字段存在"
+    expected_result: "所有必需字段存在且非空"
+
+  - id: TC02
+    name: "description以Use when开头"
+    category: structural
+    status: pass
+    description: "description字段以Use when开头，符合CSO规范"
+    preconditions:
+      - "SKILL.md frontmatter可解析"
+    steps:
+      - "读取description字段"
+      - "检查是否以'Use when'开头"
+    expected_result: "description以'Use when'开头"
+
+  - id: TC03
+    name: "脱敏无残留"
+    category: structural
+    status: pass
+    description: "所有文件无绝对路径/IP/个人目录名残留"
+    preconditions:
+      - "脱敏替换已执行"
+    steps:
+      - "grep扫描$WORK_ROOT绝对路径"
+      - "grep扫描$TEST_HOST IP地址"
+      - "grep扫描$WORK_DIR_NAME 个人目录"
+    expected_result: "无匹配"
+
+  - id: TC04
+    name: "Usage Hook段存在"
+    category: structural
+    status: pass
+    description: "SKILL.md包含Usage Hook段"
+    preconditions:
+      - "SKILL.md文件存在"
+    steps:
+      - "搜索'## Usage Hook'"
+    expected_result: "找到Usage Hook段"
+
+  - id: TC05
+    name: "环境变量在脚本中使用VAR语法"
+    category: structural
+    status: pass
+    description: "shell脚本使用${VAR:-default}语法而非硬编码路径"
+    preconditions:
+      - "scripts/下所有.sh文件可读"
+    steps:
+      - "grep扫描硬编码绝对路径"
+    expected_result: "无硬编码路径残留"
+
+  - id: TC06
+    name: "触发条件覆盖关键场景"
+    category: behavioral
+    status: pending
+    description: "用户说'部署模型'时agent能正确触发本skill"
+    preconditions:
+      - "skill已安装到agent"
+    steps:
+      - "用户输入'部署qwen3-32b模型'"
+      - "观察agent是否加载model-deploy skill"
+    expected_result: "agent加载model-deploy并执行部署流程"

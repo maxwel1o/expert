@@ -1,0 +1,14 @@
+[
+  {
+    "name": "efficientnet_single_model_validation",
+    "prompt": "使用 efficientnet-npu-skill 部署 tf_efficientnet_b0.in1k，执行 CPU/NPU 推理、compare_cpu_npu.py 精度验证，并输出小于 1% 的 README 结论。"
+  },
+  {
+    "name": "efficientnet_batch_retry",
+    "prompt": "批量运行 EfficientNetV2 和 EfficientNet Lite 模型，检查 NPU 显存释放、失败 retry、results.tsv 和 evals.json 记录。"
+  },
+  {
+    "name": "efficientnet_publish_checkpoint",
+    "prompt": "在 GitCode 模型仓库发布前执行用户确认、dry-run push、README 元数据检查和页面验证。"
+  }
+]

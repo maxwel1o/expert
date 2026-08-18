@@ -1,0 +1,25 @@
+{
+  "name": "tiny-vit-npu",
+  "description": "TinyViT 系列模型昇腾 NPU 部署与精度验证 Skill",
+  "version": "1.0.0",
+  "type": "deployment",
+  "models": [
+    "tiny_vit_5m_224.dist_in22k",
+    "tiny_vit_5m_224.in1k",
+    "tiny_vit_5m_224.dist_in22k_ft_in1k",
+    "tiny_vit_21m_512.dist_in22k_ft_in1k",
+    "tiny_vit_21m_384.dist_in22k_ft_in1k",
+    "tiny_vit_21m_224.dist_in22k_ft_in1k",
+    "tiny_vit_21m_224.in1k",
+    "tiny_vit_21m_224.dist_in22k",
+    "tiny_vit_11m_224.dist_in22k",
+    "tiny_vit_11m_224.in1k",
+    "tiny_vit_11m_224.dist_in22k_ft_in1k"
+  ],
+  "frameworks": ["PyTorch", "timm"],
+  "hardware": "Ascend910 NPU",
+  "scripts": {
+    "inference": "scripts/inference.py",
+    "compare": "scripts/compare_cpu_npu.py"
+  }
+}

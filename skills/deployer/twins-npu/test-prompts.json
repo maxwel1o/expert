@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 twins_svt_small.in1k 模型到 NPU 执行推理，然后与 CPU 结果对比验证精度差异小于 1%",
+        "expected": "完成 NPU 推理输出 Top-5 结果，CPU/NPU 精度对比各项指标均通过"
+    },
+    {
+        "id": 2,
+        "prompt": "使用 batch_run.py 串行运行全部 6 个 Twins 模型（SVT 和 PCPVT）的 CPU/NPU 精度对比",
+        "expected": "6 个模型全部完成精度对比，MaxProbDiff < 0.01，无 OOM 错误"
+    },
+    {
+        "id": 3,
+        "prompt": "在 NPU 设备不可用时回退到 CPU 完成推理并生成精度对比报告",
+        "expected": "检测到 NPU 不可用后自动回退 CPU 推理完成，输出推理结果并标记 fallback 状态"
+    },
+    {
+        "id": 4,
+        "prompt": "从 ModelScope 下载 twins_pcpvt_large.in1k 模型权重后执行 NPU 推理",
+        "expected": "成功从 modelscope 下载权重并加载到 NPU 设备完成推理，缓存到 scripts/ms_cache/"
+    }
+]

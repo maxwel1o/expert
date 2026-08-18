@@ -1,0 +1,56 @@
+[
+  {
+    "prompt": "用 Swin Transformer 在昇腾 NPU 上部署 swin_tiny_patch4_window7_224.ms_in1k 模型并进行推理验证。先检查环境，加载 CANN，确认 NPU 可用，安装依赖。然后运行 CPU 基线推理和 NPU 推理，对比精度（L2 误差 < 1%）。最后生成精度报告并发布模型仓库到 GitCode。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "模型选择与测试数据准备",
+      "CPU 基线推理",
+      "NPU 推理",
+      "CPU/NPU 精度对比",
+      "文档与截图生成",
+      "模型仓库发布"
+    ],
+    "expected_tools": [
+      "npu-smi",
+      "pip",
+      "python3 scripts/swin_npu_infer.py",
+      "python3 scripts/swin_npu_compare.py"
+    ],
+    "expected_artifacts": [
+      "swin_tiny_patch4_window7_224.ms_in1k_cpu_output.pt",
+      "swin_tiny_patch4_window7_224.ms_in1k_npu_output.pt"
+    ],
+    "tags": ["swin", "npu", "ascend", "inference", "precision-verification"]
+  },
+  {
+    "prompt": "批量处理 19 个 Swin Transformer 变体在昇腾 NPU 上的推理和精度验证。使用 swin_npu_batch.py 进行串行执行，确保每个模型完成后释放 NPU 显存，避免 OOM。汇总所有模型的性能数据和精度指标到 result.json。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "串行多模型批量执行",
+      "文档与截图生成"
+    ],
+    "expected_tools": [
+      "python3 scripts/swin_npu_batch.py --all",
+      "torch.npu.empty_cache()",
+      "npu-smi"
+    ],
+    "expected_artifacts": [
+      "result.json"
+    ],
+    "tags": ["swin", "batch", "npu", "ascend", "serial-execution"]
+  },
+  {
+    "prompt": "NPU 不可用时回退到 CPU 推理。在执行 Swin Transformer 部署时检测到 NPU 不可用（torch.npu.is_available() 为 False），自动切换到 CPU 执行推理并在输出中标记 fallback。精度对比基于纯 CPU 结果。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "NPU 推理（回退到 CPU）",
+      "CPU 基线推理"
+    ],
+    "expected_tools": [
+      "torch.npu.is_available()",
+      "python3 scripts/swin_npu_infer.py --device cpu"
+    ],
+    "expected_fallback_behavior": "NPU 不可用时自动回退到 CPU 推理，输出标记 NPU_FALLBACK=true",
+    "tags": ["swin", "fallback", "cpu", "edge-case"]
+  }
+]

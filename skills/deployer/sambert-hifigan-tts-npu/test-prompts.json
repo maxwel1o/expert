@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sambert-hifigan-smoke-test",
+    "prompt": "帮我在一台 Ascend910 服务器上验证 speech_sambert-hifigan_tts_zh-cn_16k 的 CPU 和 NPU 推理是否都能跑通。",
+    "expected": "先检查 npu-smi、CANN、torch_npu 和磁盘空间，再执行单模型 CPU/NPU smoke test，最后输出结果路径和失败 fallback。"
+  },
+  {
+    "id": "sambert-hifigan-batch-eval",
+    "prompt": "我想串行评测 7 个 Sambert-HifiGAN TTS 模型，并生成 CPU/NPU 精度对比报告。",
+    "expected": "明确串行执行、逐模型释放显存、生成 results/results.json 与 compare_report.txt，并说明失败模型如何跳过和重试。"
+  },
+  {
+    "id": "sambert-hifigan-publish-confirmation",
+    "prompt": "把验证通过的 Sambert-HifiGAN NPU 适配结果发布到 GitCode 模型仓库。",
+    "expected": "在发布前暂停请求用户确认仓库名、可见性和 token 权限，发布失败时提供回滚和 retry 策略。"
+  }
+]

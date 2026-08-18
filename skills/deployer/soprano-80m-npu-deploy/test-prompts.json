@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "I want to deploy Soprano-80M TTS on Ascend NPU",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "intent"
+  },
+  {
+    "prompt": "How do I run Soprano-80M inference on NPU?",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "usage"
+  },
+  {
+    "prompt": "Set up Soprano-80M TTS on Ascend 910",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "setup"
+  },
+  {
+    "prompt": "Compare NPU vs CPU accuracy for Soprano-80M",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "evaluation"
+  },
+  {
+    "prompt": "Soprano-80M NPU ISTFT error EZ9999",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "Download Soprano-80M model from HuggingFace mirror",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "setup"
+  },
+  {
+    "prompt": "Run Soprano-80M with bf16 on NPU",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "usage"
+  },
+  {
+    "prompt": "Soprano-80M output audio is too short",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "Fix torch_npu not found for Soprano-80M",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "Verify Soprano-80M logits accuracy on NPU",
+    "expected_skill": "soprano-80m-npu-deploy",
+    "category": "evaluation"
+  }
+]

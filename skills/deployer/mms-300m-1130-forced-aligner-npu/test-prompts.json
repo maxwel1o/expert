@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "prompt": "在华为昇腾 NPU 上部署 mms-300m-1130-forced-aligner 语音强制对齐模型，验证推理精度并与 CPU 对比",
+    "expected": "按照 8 步工作流执行：初始化 CANN 环境 → 下载模型权重 → 单文件推理 → CPU vs NPU 精度对比 → 强制对齐 Pipeline → 性能基准测试 → 验收确认。输出推理结果、CosSim > 0.999 精度指标、对齐时间戳。"
+  },
+  {
+    "id": 2,
+    "prompt": "我想用 mms-300m 模型做强制对齐，需要从 huggingface 下载模型并在华为 NPU 上部署。请提供具体命令",
+    "expected": "提供 GIT_LFS_SKIP_SMUDGE=1 方式从 hf-mirror 或 GitCode 镜像下载模型权重，torch_npu 环境配置，单文件推理命令和 CTC 强制对齐 Pipeline 代码。"
+  },
+  {
+    "id": 3,
+    "prompt": "请对比 mms-300m-1130-forced-aligner 在 CPU 和华为昇腾 NPU 上的推理精度和性能差异",
+    "expected": "执行 CPU vs NPU 精度对比 benchmark，输出余弦相似度、MSE、转录一致性，以及不同音频长度下的推理时间和 RTF 对比表。"
+  },
+  {
+    "id": 4,
+    "prompt": "mms-300m-1130-forced-aligner 模型在昇腾 NPU 上推理时出现 OOM 错误怎么办？",
+    "expected": "提供 OOM 处理策略：关闭其他 NPU 进程 (npu-smi info 查看), 使用 ASCEND_RT_VISIBLE_DEVICES 切换到空闲卡, 调用 torch.npu.empty_cache() 回收显存, 减小 batch size。"
+  },
+  {
+    "id": 5,
+    "prompt": "我有一批 16kHz 的 wav 文件，想在华为 NPU 上用 mms-300m 批量做强制对齐，输出每个文件的转录文本和时间戳",
+    "expected": "使用 scripts/inference.py batch 进行批量推理，或使用 scripts/align_pipeline.py 自定义 Pipeline 处理目录下所有 wav 文件，输出包含 transcription、speech_start_s、speech_end_s、token_timestamps 的 JSON 结果。"
+  },
+  {
+    "id": 6,
+    "prompt": "请测试 mms-300m-1130-forced-aligner 在不同音频长度 (1s, 3s, 5s, 10s, 30s) 下在华为 NPU 上的推理性能表现",
+    "expected": "运行 scripts/benchmark.py 进行多音频长度性能测试，输出每种长度的推理中位数时间和 RTF 实时因子，确认 RTF 均 < 1.0x。"
+  },
+  {
+    "id": 7,
+    "prompt": "mms-300m-1130-forced-aligner 模型下载失败，如何处理连接超时问题？",
+    "expected": "提供多种下载方式备选：hf-mirror、GitCode 镜像，以及 wget --retry-connrefused 重试策略，并验证下载文件完整性。"
+  },
+  {
+    "id": 8,
+    "prompt": "请用 mms-300m 强制对齐模型对一个 16kHz 单声道音频提取 CTC 时间戳对齐信息",
+    "expected": "执行 scripts/align_pipeline.py，加载模型并执行 Force Alignment，输出包含 speech_start_s、speech_end_s 和逐 token_timestamps 的对齐结果 JSON。"
+  },
+  {
+    "id": 9,
+    "prompt": "华为昇腾 NPU 上使用 mms-300m 模型时，如何验证 CANN 环境已正确配置？",
+    "expected": "执行 npu-smi info 查看设备状态，source set_env.sh 加载环境变量，python3 -c \"import torch; print(torch.npu.is_available())\" 验证 NPU 可用，pip install torch_npu 确认安装。"
+  },
+  {
+    "id": 10,
+    "prompt": "mms-300m 强制对齐结果全为 blank，没有检测到有效语音，如何排查？",
+    "expected": "提供排查步骤：确认音频采样率为 16kHz 单声道、检查音频是否包含有效语音信号、调整音频预处理参数、使用 Wav2Vec2Processor 的 padding 和 truncation 设置。"
+  },
+  {
+    "id": 11,
+    "prompt": "请生成 mms-300m-1130-forced-aligner 在华为 NPU 上的完整部署验收报告",
+    "expected": "执行验收检查表所有检查项：NPU 可用性、模型加载、单文件推理、精度验证、对齐 Pipeline、性能基准，汇总生成 acceptance_report.json。"
+  },
+  {
+    "id": 12,
+    "prompt": "mms-300m-1130-forced-aligner 在 GPU 和 NPU 上推理精度不一致怎么办？",
+    "expected": "确认 NPU 使用 fp32 精度而非混合精度、检查 torch_npu 版本兼容性、验证 CANN 算子版本、对比 logits 输出的 Cosine Similarity 和 MSE 指标定位差异来源。"
+  }
+]

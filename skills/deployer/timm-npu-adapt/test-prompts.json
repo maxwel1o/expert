@@ -1,0 +1,62 @@
+[
+  {
+    "prompt": "我需要将 timm 的 MobileNetV4-Hybrid 模型（timm/mobilenetv4_hybrid_medium.ix_e550_r384_in1k）适配到华为昇腾 NPU 上。请帮我完成推理验证和精度对比。环境已配置 torch 和 torch_npu，需要从 HuggingFace 镜像下载权重。输入尺寸 384x384。",
+    "expected_output": {
+      "actions": [
+        "确认 HF_ENDPOINT 镜像设置正确",
+        "安装 timm 和 pillow 依赖",
+        "使用 scripts/inference.py 进行 NPU 推理验证",
+        "使用 scripts/accuracy_eval.py 进行精度对比（4 张合成图）",
+        "输出余弦相似度和预测一致率"
+      ],
+      "artifacts": [
+        "accuracy_results.json（含 MobileNetV4-Hybrid 精度数据）",
+        "execution.log"
+      ],
+      "quality_gates": {
+        "cosine_similarity": ">= 1.0",
+        "prediction_match_pct": "100%"
+      }
+    }
+  },
+  {
+    "prompt": "我需要批量验证 10 个 timm 视觉模型在 NPU 上的精度和性能。请按以下要求执行：1) 所有模型串行执行 2) 单模型失败不影响后续 3) 汇总所有模型的精度对比结果 4) 记录 NPU/CPU 加速比。模型列表包括 MobileNetV4、VOLO、ResNeXt、SE-ResNet、CaiT、XCiT 等。",
+    "expected_output": {
+      "actions": [
+        "对每个模型依次执行 accuracy_eval.py",
+        "模型失败时记录到 failures.log 并继续执行下一模型",
+        "汇总所有模型的精度指标（cosine_similarity, prediction_match_pct）",
+        "汇总所有模型的 NPU/CPU 加速比"
+      ],
+      "artifacts": [
+        "accuracy_results.json（全部 10 个模型）",
+        "failures.log（如有失败模型）",
+        "execution.log"
+      ],
+      "error_handling": {
+        "model_failure": "记录到 failures.log，继续处理下一模型",
+        "download_failure": "检查 HF_ENDPOINT，重试 2 次后跳过"
+      }
+    }
+  },
+  {
+    "prompt": "我在验证 timm 的 VOLO-D3 模型（timm/volo_d3_448.sail_in1k）时遇到算子兼容性问题。推理时报错提示某个算子未在 NPU 上实现。输入尺寸 448x448。请帮我排查并提供解决方案。",
+    "expected_output": {
+      "analysis": [
+        "捕获 RuntimeError 获取不兼容算子名称和堆栈信息",
+        "检查该算子在 torch_npu 文档中的支持状态",
+        "搜索是否有替代实现或 workaround"
+      ],
+      "actions": [
+        "记录不兼容算子信息到算子兼容性报告",
+        "建议使用 CPU 回退或替换算子实现",
+        "如果可能，建议升级 torch_npu 版本",
+        "生成兼容性说明文档"
+      ],
+      "artifacts": [
+        "op_compatibility_report.md",
+        "execution.log"
+      ]
+    }
+  }
+]

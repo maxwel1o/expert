@@ -1,0 +1,33 @@
+{
+  "description": "Test prompts and audio samples for Qwen3-ASR NPU verification",
+  "test_cases": [
+    {
+      "name": "chinese_short_audio",
+      "audio": "test_data/asr_zh.wav",
+      "language": null,
+      "expected_keywords": ["交易", "停滞"]
+    },
+    {
+      "name": "english_long_audio",
+      "audio": "test_data/asr_en.wav",
+      "language": "English",
+      "expected_keywords": ["yeah"]
+    },
+    {
+      "name": "batch_mixed_language",
+      "audio": ["test_data/asr_zh.wav", "test_data/asr_en.wav"],
+      "language": [null, "English"],
+      "batch_size": 2
+    }
+  ],
+  "model_loading_smoke_test": {
+    "model_path": "/opt/atomgit/QwenASR/models",
+    "dtype": "bfloat16",
+    "max_model_len": 65536,
+    "expected_tasks": ["generate", "transcription"]
+  },
+  "precision_thresholds": {
+    "min_similarity_percent": 95.0,
+    "max_precision_gap_percent": 5.0
+  }
+}

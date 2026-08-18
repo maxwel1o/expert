@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "使用 whisper-large-v3 在昇腾 NPU 上对一段英文音频进行语音识别，输出文本转录结果。请按照 8 步工作流执行：先检查 NPU 环境，获取模型权重，然后运行 NPU 推理，最后完成精度验证。",
+    "expected": "输出 NPU 环境检查结果、模型加载状态、推理转录文本、推理耗时和速度。精度验证结果：Logits RMS 误差 < 1%，生成文本匹配率 100%。"
+  },
+  {
+    "id": 2,
+    "prompt": "我有一段 30 秒的中文语音录音，想翻译成英文文本。请使用 whisper-large-v3 在昇腾 NPU 上完成翻译推理，并验证 NPU float16 推理精度与 CPU float32 参考的误差不超过 1%。",
+    "expected": "NPU 翻译推理输出英文文本；精度对比结果显示 Logits RMS 相对误差 < 1%，Top-1 Token 匹配率 100%，Encoder 余弦相似度 > 0.999。包含翻译耗时和速度数据。"
+  },
+  {
+    "id": 3,
+    "prompt": "我需要部署 whisper-large-v3 到 Ascend 910B4 NPU 上并跑性能基准测试。请用不同时长（1s/3s/5s/10s/30s）的音频测试推理性能，汇总成表格。同时说明算子兼容性和适配要点。",
+    "expected": "性能基准测试表（5 行）：输入音频时长、Mel 帧数 3000、平均耗时、输出 Token 数、速度（ms/token）。适配要点说明：算子全部原生支持，attn_implementation 必须使用 eager，推理使用 float16 精度。"
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "name": "tinynet-npu-skill",
+  "version": "1.0.0",
+  "description": "TinyNet 系列模型（tinynet_e/d/c/b/a）昇腾 NPU 统一部署与测试 Skill",
+  "type": "deployment",
+  "author": "m0_74196153",
+  "license": "Apache-2.0",
+  "tags": ["NPU", "Ascend", "timm", "TinyNet", "image-classification"],
+  "supported_models": [
+    {
+      "name": "tinynet_e.in1k",
+      "repo": "https://gitcode.com/m0_74196153/tinynet_e-npu"
+    },
+    {
+      "name": "tinynet_d.in1k",
+      "repo": "https://gitcode.com/m0_74196153/tinynet_d-npu"
+    },
+    {
+      "name": "tinynet_c.in1k",
+      "repo": "https://gitcode.com/m0_74196153/tinynet_c-npu"
+    },
+    {
+      "name": "tinynet_b.in1k",
+      "repo": "https://gitcode.com/m0_74196153/tinynet_b-npu"
+    },
+    {
+      "name": "tinynet_a.in1k",
+      "repo": "https://gitcode.com/m0_74196153/tinynet_a-npu"
+    }
+  ],
+  "parameters": {
+    "model": {
+      "type": "string",
+      "description": "模型名称（tinynet_e / tinynet_d / tinynet_c / tinynet_b / tinynet_a）",
+      "required": true
+    },
+    "device": {
+      "type": "string",
+      "description": "推理设备（cpu / npu）",
+      "default": "npu",
+      "required": false
+    }
+  }
+}

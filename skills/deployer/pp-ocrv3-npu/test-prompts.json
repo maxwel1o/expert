@@ -1,0 +1,17 @@
+[
+  {
+    "id": "det-multilingual",
+    "prompt": "使用 PP-OCRv3 多语言检测模型 Multilingual_PP-OCRv3_det_infer 在 NPU 上对 test_image 进行文本检测，输出检测框坐标和置信度，并与 CPU 结果对比",
+    "expected_output": "compare_result.json 中该模型 status 为 pass 或 warn，框匹配率 ≥ 90%"
+  },
+  {
+    "id": "rec-chinese",
+    "prompt": "使用 ch_PP-OCRv3_rec_infer 识别模型在 NPU 上进行文本识别，输入 test_rec_image，输出识别文本和置信度",
+    "expected_output": "识别文本与 CPU 结果完全一致，logits 相对差异 < 1%"
+  },
+  {
+    "id": "batch-all-models",
+    "prompt": "批量处理全部 16 个 PP-OCRv3 模型（4 检测 + 12 识别），串行执行，每个模型释放显存，跳过失败的模型并记录",
+    "expected_output": "16 个模型全部处理完成，失败的记录在 failed_models.txt，通过的生成 compare_result.json 和 readme.md"
+  }
+]

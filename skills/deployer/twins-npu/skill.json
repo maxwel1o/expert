@@ -1,0 +1,40 @@
+{
+  "name": "twins-npu",
+  "description": "Twins 系列模型（SVT/PCPVT）昇腾 NPU 部署与精度验证 Skill",
+  "version": "1.0.0",
+  "models": [
+    {"name": "twins_svt_small.in1k", "repo": "https://gitcode.com/m0_74196153/twins_svt_small.in1k-npu"},
+    {"name": "twins_svt_large.in1k", "repo": "https://gitcode.com/m0_74196153/twins_svt_large.in1k-npu"},
+    {"name": "twins_svt_base.in1k", "repo": "https://gitcode.com/m0_74196153/twins_svt_base.in1k-npu"},
+    {"name": "twins_pcpvt_small.in1k", "repo": "https://gitcode.com/m0_74196153/twins_pcpvt_small.in1k-npu"},
+    {"name": "twins_pcpvt_large.in1k", "repo": "https://gitcode.com/m0_74196153/twins_pcpvt_large.in1k-npu"},
+    {"name": "twins_pcpvt_base.in1k", "repo": "https://gitcode.com/m0_74196153/twins_pcpvt_base.in1k-npu"}
+  ],
+  "parameters": {
+    "model_name": {
+      "type": "string",
+      "description": "模型名称，如 twins_svt_small.in1k",
+      "required": true
+    },
+    "device": {
+      "type": "string",
+      "description": "推理设备 (cpu/npu)",
+      "default": "npu"
+    },
+    "num_runs": {
+      "type": "integer",
+      "description": "推理轮次",
+      "default": 5
+    }
+  },
+  "requirements": [
+    "torch>=2.0.0",
+    "torch_npu>=2.0.0",
+    "timm>=0.9.0",
+    "torchvision>=0.15.0",
+    "Pillow>=10.0.0",
+    "numpy>=1.22.0",
+    "modelscope>=1.0.0",
+    "safetensors>=0.4.0"
+  ]
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 whisper-medium 模型到 NPU 并执行推理验证，完成精度对比",
+        "expected": "完成环境初始化、模型下载、NPU 推理、CPU vs NPU 精度对比，精度误差 < 1%，输出 accuracy_results.json"
+    },
+    {
+        "id": 2,
+        "prompt": "对 whisper-medium 进行 NPU 性能基准测试并输出性能报告",
+        "expected": "完成模型加载、warmup、20 轮端到端延迟测试、Encoder 延迟测试，输出 perf_results.json 含 RTF 和加速比"
+    },
+    {
+        "id": 3,
+        "prompt": "NPU 不可用时使用 CPU 完成 whisper-medium 的基础推理验证",
+        "expected": "检测 NPU 不可用后自动回退 CPU 推理，输出转录文本结果，不报错中断"
+    }
+]

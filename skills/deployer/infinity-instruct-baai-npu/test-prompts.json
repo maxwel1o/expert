@@ -1,0 +1,61 @@
+[
+  {
+    "prompt": "我需要将 BAAI/Infinity-Instruct-3M-0625-Qwen2-7B 模型部署到华为昇腾 Ascend 910B 上进行推理。请帮我：1) 检查 NPU 环境和 vLLM-Ascend 安装 2) 完成单卡推理验证 3) 运行精度验证。CANN 8.0.RC1，Python 3.10，单卡 Ascend 910B。",
+    "expected_output": {
+      "actions": [
+        "source /usr/local/Ascend/ascend-toolkit/set_env.sh 加载 CANN 环境",
+        "export ASCEND_RT_VISIBLE_DEVICES=0 设置单卡",
+        "克隆适配仓库 Infinity-Instruct-3M-0625-Qwen2-7B-npu",
+        "运行 inference.py 进行推理验证（temperature=0.7, max-tokens=512）",
+        "运行 accuracy_run.py 进行精度验证（temperature=0.1, max-tokens=256）"
+      ],
+      "artifacts": [
+        "accuracy_report.json（含 10 个测试用例的匹配度）",
+        "execution.log"
+      ],
+      "quality_gates": {
+        "accuracy_match": ">= 0.99",
+        "pass_rate": "100%"
+      }
+    }
+  },
+  {
+    "prompt": "我需要部署 BAAI 的 70B 大模型 Infinity-Instruct-3M-0625-Llama3-70B 到 2 张 Ascend 910B 上。需要：1) 配置双卡张量并行（TP=2）2) 完成推理验证 3) 运行性能基准测试。请确保双卡通信正常，并采集 P50/P95 延迟和吞吐量数据。",
+    "expected_output": {
+      "actions": [
+        "export ASCEND_RT_VISIBLE_DEVICES=0,1 设置双卡",
+        "克隆适配仓库 Infinity-Instruct-3M-0625-Llama3-70B-npu",
+        "运行 inference.py 指定 --tensor-parallel-size 2",
+        "运行 accuracy_run_perf.py 采集性能数据（warmup=2, trials=5, max-tokens=512）"
+      ],
+      "artifacts": [
+        "perf_report.json（含 P50/P95 延迟、吞吐量、TPOT）",
+        "execution.log"
+      ],
+      "error_handling": {
+        "hccl_failure": "检查 ASCEND_RT_VISIBLE_DEVICES 和 HCCL 配置",
+        "oom": "降低 gpu_memory_utilization 至 0.8 后重试"
+      }
+    }
+  },
+  {
+    "prompt": "我需要批量处理全部 7 个 BAAI Infinity-Instruct 系列模型的精度验证。包括 5 个单卡模型（7B-9B）和 2 个双卡模型（70B）。请确保串行执行防止显存冲突，单卡模型先处理，双卡模型后处理，失败时不影响后续模型。",
+    "expected_output": {
+      "actions": [
+        "先处理 5 个单卡模型（ASCEND_RT_VISIBLE_DEVICES=0）",
+        "再处理 2 个双卡模型（ASCEND_RT_VISIBLE_DEVICES=0,1, TP=2）",
+        "每个模型运行 accuracy_run.py 进行精度验证",
+        "汇总全部 7 个模型的精度匹配度数据"
+      ],
+      "artifacts": [
+        "accuracy_report.json（全部 7 个模型）",
+        "execution.log",
+        "failures.log（如有失败模型）"
+      ],
+      "error_handling": {
+        "model_failure": "记录到 failures.log，继续处理下一模型",
+        "resource_conflict": "确保单卡和双卡模型串行执行，互不干扰"
+      }
+    }
+  }
+]

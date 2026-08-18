@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 test_convnext.r160_in1k 模型到 NPU 并执行推理验证精度",
+        "expected": "完成 CPU/NPU 推理、精度对比、误差 < 1%，输出推理结果和对比报告"
+    },
+    {
+        "id": 2,
+        "prompt": "串行执行全部三个 ConvNeXt 测试模型（test_convnext.r160_in1k / test_convnext2.r160_in1k / test_convnext3.r160_in1k）的 NPU 推理和精度验证",
+        "expected": "三个模型依次串行执行，每个完成后释放资源，精度均 < 1%"
+    },
+    {
+        "id": 3,
+        "prompt": "NPU 不可用时回退到 CPU 完成 test_convnext.r160_in1k 推理",
+        "expected": "检测到 NPU 不可用后自动回退 CPU，输出推理结果并标记 fallback"
+    }
+]

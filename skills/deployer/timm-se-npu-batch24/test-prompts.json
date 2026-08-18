@@ -1,0 +1,14 @@
+[
+  {
+    "name": "single_model_npu_validation",
+    "prompt": "使用 timm-se-npu-batch24 部署 seresnet50.ra2_in1k，在 Ascend NPU 上运行推理并生成 CPU/NPU 精度对比，要求输出 results.tsv、evals.json 和 README 精度结论。"
+  },
+  {
+    "name": "halonet_input_size_recovery",
+    "prompt": "使用 sehalonet33ts.ra2_in1k 执行 NPU 推理，检查 256x256 输入尺寸、NPU 显存回收、失败 retry 和用户确认检查点。"
+  },
+  {
+    "name": "publish_checkpoint",
+    "prompt": "完成 senet154.gluon_in1k 的 README、截图和精度表生成后，在发布 GitCode 模型仓库前执行用户确认、dry-run push 和页面验证。"
+  }
+]

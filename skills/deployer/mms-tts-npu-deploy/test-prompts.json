@@ -1,0 +1,32 @@
+[
+    {
+        "id": "mms-tts-env",
+        "name": "NPU 环境预检验证",
+        "prompt": "检查昇腾 NPU 环境是否就绪，加载 CANN 并验证 torch_npu",
+        "expected": "npu-smi info 显示设备正常，torch.npu.is_available() 返回 True"
+    },
+    {
+        "id": "mms-tts-download",
+        "name": "模型下载验证",
+        "prompt": "使用 hf-mirror.com 镜像下载 facebook/mms-tts-hin 模型",
+        "expected": "下载 config.json、model.safetensors 到 ./model/ 目录"
+    },
+    {
+        "id": "mms-tts-inference",
+        "name": "基础推理验证",
+        "prompt": "在昇腾 NPU 上运行 MMS-TTS 语音合成推理",
+        "expected": "成功输出 output.wav 文件，内容为有效语音"
+    },
+    {
+        "id": "mms-tts-accuracy",
+        "name": "精度验证",
+        "prompt": "运行精度验证脚本测试梅尔频谱分布稳定性",
+        "expected": "Mel Mean 方差 < 3.0，Mel Std 方差 < 2.0，输出 PASS"
+    },
+    {
+        "id": "mms-tts-perf",
+        "name": "性能基准测试",
+        "prompt": "运行性能基准测试验证 NPU 推理延迟",
+        "expected": "平均延迟 ~100ms，RTF < 1.0"
+    }
+]

@@ -1,0 +1,17 @@
+# 场景名: varlen-17829-600 (LongCat-Flash-Chat, 吞吐摸高)
+# 数据集: data_n17829_avg3894 (17829条, avg 2580 input token)
+# 来源: prompt_long_utf8_dihuawei_20260128200043966.csv messages字段提取
+dataset_type: varlen
+dataset: data_n17829_avg3894
+num_requests: 17829
+output_length: 600
+ignore_eos: False
+
+tokenizer: $PROF_ROOT/models/LongCat-Flash-Chat
+trust_remote_code: True
+provider: ./conf/provider_longcat.yaml
+
+recommended:
+  smoke_test:
+    concurrency: 1
+    num_requests: 10

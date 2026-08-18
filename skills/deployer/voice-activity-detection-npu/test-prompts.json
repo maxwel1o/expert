@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "使用 pyannote/segmentation 在 NPU 上部署声音活动检测模型",
+    "expected": "执行完整部署流程：环境初始化，NPU 检测，依赖安装，模型加载，NPU 推理验证，VAD 管线处理，给出推理结果"
+  },
+  {
+    "id": 2,
+    "prompt": "对比 pyannote/segmentation 在 CPU 和 NPU 上的推理精度",
+    "expected": "运行精度对比验证，生成 200 个随机种子信号的逐帧 VAD score 对比，输出平均 VAD 决策一致率，确认精度是否达标"
+  },
+  {
+    "id": 3,
+    "prompt": "在昇腾 NPU 上运行 VAD 管线处理，检测语音活动",
+    "expected": "加载 pyannote/segmentation 模型，构建滑动窗口 VAD 管线，对测试音频执行滞后阈值判决，输出说话段起止时间列表"
+  }
+]

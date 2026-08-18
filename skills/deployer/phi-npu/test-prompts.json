@@ -1,0 +1,74 @@
+[
+  {
+    "prompt": "请确认昇腾 NPU 环境，运行 npu-smi info 检查设备状态，验证 torch_npu 是否可用，并设置环境变量 ASCEND_RT_VISIBLE_DEVICES=0。",
+    "context": "环境初始化阶段，需要确认 NPU 设备可用。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "npu-smi"
+  },
+  {
+    "prompt": "下载 phi-2 模型权重到 /opt/models/phi-2，要求使用 modelscope 的 snapshot_download 方法。",
+    "context": "从 ModelScope 下载模型权重。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "modelscope|snapshot_download"
+  },
+  {
+    "prompt": "在昇腾 NPU 上启动 phi-1 的 vLLM-Ascend 推理服务，端口 8000，使用 float16 精度。",
+    "context": "部署 phi-1 模型的 vLLM 服务。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "vllm serve"
+  },
+  {
+    "prompt": "执行 curl 命令验证 phi-2 的 vLLM 服务是否正常运行，发送 completion 请求测试代码生成。",
+    "context": "验证模型推理服务可用性。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "curl"
+  },
+  {
+    "prompt": "使用 scripts/inference.py 对 phi-2 模型进行 NPU 推理测试，prompt 为 'def fibonacci(n):'，生成长度 100。",
+    "context": "使用 transformers 进行直接推理。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "inference.py"
+  },
+  {
+    "prompt": "运行精度检查脚本 scripts/check_accuracy.py 验证 phi-2 的 NPU 输出与 CPU 基线是否一致，要求 top-1 准确率 >= 99%。",
+    "context": "精度对比验证阶段。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "check_accuracy"
+  },
+  {
+    "prompt": "执行 scripts/perf_test.py phi-2 进行性能基准测试，记录吞吐量和延迟数据。",
+    "context": "性能基准测试阶段。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "perf_test"
+  },
+  {
+    "prompt": "将精度对比和性能测试结果整理归档到 results/ 和 references/ 目录，并在 SKILL.md 中更新 benchmark 数据。",
+    "context": "结果归档与文档更新。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "git add|results"
+  },
+  {
+    "prompt": "phi-1 在 vLLM 部署时遇到 'ascend算子不兼容' 错误，请分析可能原因并提供回滚策略。",
+    "context": "异常处理场景：CANN 算子兼容性问题。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "dtype|float16|fallback"
+  },
+  {
+    "prompt": "检查 torch_npu 是否可用，如果 NPU 不可用，请回退到 CPU 模式进行推理。",
+    "context": "异常处理场景：NPU 不可用时的 fallback 策略。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "torch.npu.is_available|CPU"
+  },
+  {
+    "prompt": "汇总 phi-1、phi-1.5、phi-2 三个模型在 Ascend910B4 上的精度和性能数据，生成包含 benchmark 阈值的验证报告。",
+    "context": "eval 评测阶段，输出模型精度和性能对比。",
+    "expected_tools": ["Python3"],
+    "expected_pattern": "benchmark|验证"
+  },
+  {
+    "prompt": "列出 phi-npu 技能目录下的 scripts/、references/ 和 results/ 中的文件，并说明每个文件的用途。",
+    "context": "资源检视与文档整理。",
+    "expected_tools": ["Bash"],
+    "expected_pattern": "scripts|references|results"
+  }
+]

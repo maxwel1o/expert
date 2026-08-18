@@ -1,0 +1,14 @@
+[
+  {
+    "prompt": "I need to deploy OuteTTS-0.3-500M on Ascend NPU for text-to-speech. Please guide me through the full process including environment setup, model download, inference, and accuracy evaluation.",
+    "expected_steps": ["install outetts", "download model", "download WavTokenizer", "run inference.py", "eval accuracy"]
+  },
+  {
+    "prompt": "When running OuteTTS inference on NPU, I get error code 507033 (LazySetDevice). What does this mean and how do I fix it?",
+    "expected_steps": ["check NPU devices", "npu-smi info", "kill occupying process", "retry inference"]
+  },
+  {
+    "prompt": "The NPU vs CPU accuracy for my OuteTTS deployment shows MSE of 1e-4 which is too high. What should I check?",
+    "expected_steps": ["verify model weights", "check dtype consistency", "compare preprocessing", "re-run eval_accuracy.py"]
+  }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "prompt": "使用 aimv2-adapt-npu 部署 224-distilled 变体到 Ascend NPU，执行权重转换和 FP32 推理验证",
+        "expected": "完成权重 Key 转换（Timm -> HF 映射 + QKV 合并），FP32 NPU 推理输出 shape [1,256,1024]，余弦相似度 > 0.999"
+    },
+    {
+        "id": 2,
+        "prompt": "对 aimv2-adapt-npu 的 336-distilled 变体执行 NPU 推理并验证精度",
+        "expected": "完成 336-distilled 权重下载、Key 转换和 NPU 推理，精度对比 max_diff < 1%，cos_sim > 0.999"
+    },
+    {
+        "id": 3,
+        "prompt": "使用 aimv2-adapt-npu 部署 224-lit 变体到 NPU，输入图片和文本 prompt 执行多模态推理",
+        "expected": "完成 Lit 变体双编码器（视觉+文本）的 NPU 推理，输出 feature 维度正确，无 NaN 或全零"
+    },
+    {
+        "id": 4,
+        "prompt": "对 aimv2-adapt-npu native 变体执行 FP16 NPU 推理并对比 FP32 精度",
+        "expected": "native 变体 FP16/FP32 精度对比，cos_sim ~ 1.0，个别离群值可接受（浮点累积差异 < 0.002%）"
+    },
+    {
+        "id": 5,
+        "prompt": "模拟 aimv2-adapt-npu 部署时 NPU 不可用的异常场景，验证 fallback 到 CPU 推理",
+        "expected": "检测 NPU 不可用后输出错误提示，fallback 到 CPU 推理模式，日志标注 dry_run"
+    },
+    {
+        "id": 6,
+        "prompt": "对 aimv2-adapt-npu 全部 4 个变体串行执行 NPU 推理，每步验证检查点并输出评测结果",
+        "expected": "逐个变体串行执行部署流程，每步 CP 检查点确认，最终生成完整的 evals.json 和 results.tsv"
+    }
+]

@@ -1,0 +1,29 @@
+{
+  "model": "whisper-large-v3",
+  "date": "2026-05-09",
+  "device": "Ascend910B4",
+  "cann": "8.5.1",
+  "torch": "2.9.0",
+  "transformers": "4.57.6",
+  "accuracy": {
+    "generate_match_rate": 1.0,
+    "logits_rms_rel_error_pct": 0.553,
+    "top1_match": 1.0,
+    "top5_overlap": 1.0,
+    "encoder_mean_cosine": 0.999653,
+    "encoder_pearson_corr": 0.999688,
+    "within_1pct": true
+  },
+  "performance": {
+    "dtype": "float16",
+    "encoder_frames": 3000,
+    "typical_inference_ms": 250,
+    "benchmark_results": [
+      {"audio_sec": 1, "time_s": 0.25, "tokens": 1},
+      {"audio_sec": 3, "time_s": 0.25, "tokens": 1},
+      {"audio_sec": 5, "time_s": 0.25, "tokens": 1},
+      {"audio_sec": 10, "time_s": 0.72, "tokens": 7},
+      {"audio_sec": 30, "time_s": 0.40, "tokens": 3}
+    ]
+  }
+}

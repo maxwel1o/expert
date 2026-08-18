@@ -1,0 +1,50 @@
+[
+  {
+    "id": "npu-env-verify",
+    "name": "NPU 环境验证",
+    "prompt": "验证华为昇腾 NPU 环境是否可用，检查 torch_npu 导入和基本设备信息。",
+    "commands": ["python3 -c \"import torch; import torch_npu; print('NPU available:', torch.npu.is_available()); print('NPU device:', torch.npu.get_device_name(0))\""],
+    "verification": "输出 NPU available: True 且设备名称无报错",
+    "expected": "NPU 环境正常"
+  },
+  {
+    "id": "weight-download",
+    "name": "权重下载验证",
+    "prompt": "从 HuggingFace 下载 WebSSL MAE 300M 模型权重。",
+    "commands": ["python3 -c \"import os; os.environ['HF_ENDPOINT']='https://hf-mirror.com'; from transformers import AutoImageProcessor, AutoModel; AutoImageProcessor.from_pretrained('facebook/webssl-mae300m-full2b-224', trust_remote_code=True); AutoModel.from_pretrained('facebook/webssl-mae300m-full2b-224', trust_remote_code=True); print('Downloaded: facebook/webssl-mae300m-full2b-224')\""],
+    "verification": "权重下载成功",
+    "expected": "Downloaded: facebook/webssl-mae300m-full2b-224"
+  },
+  {
+    "id": "npu-inference-300m",
+    "name": "NPU 推理验证 300M",
+    "prompt": "在 NPU 上运行 MAE 300M 模型推理，验证输出特征向量。",
+    "commands": ["export MODEL_NAME=facebook/webssl-mae300m-full2b-224; python3 scripts/inference.py --device npu --runs 5"],
+    "verification": "推理成功，输出 last_hidden_state 并显示延迟指标",
+    "expected": "NPU 推理正常，延迟约 22ms"
+  },
+  {
+    "id": "npu-inference-700m",
+    "name": "NPU 推理验证 700M",
+    "prompt": "在 NPU 上运行 MAE 700M 模型推理验证。",
+    "commands": ["export MODEL_NAME=facebook/webssl-mae700m-full2b-224; python3 scripts/inference.py --device npu --runs 5"],
+    "verification": "推理成功",
+    "expected": "NPU 推理正常，延迟约 31ms"
+  },
+  {
+    "id": "npu-inference-1b",
+    "name": "NPU 推理验证 1B",
+    "prompt": "在 NPU 上运行 MAE 1B 模型推理验证。",
+    "commands": ["export MODEL_NAME=facebook/webssl-mae1b-full2b-224; python3 scripts/inference.py --device npu --runs 5"],
+    "verification": "推理成功",
+    "expected": "NPU 推理正常，延迟约 38ms"
+  },
+  {
+    "id": "accuracy-verify",
+    "name": "精度对比验证",
+    "prompt": "对比 NPU 与 CPU 的特征输出，验证 L2 relative error 在 1% 以内。",
+    "commands": ["export MODEL_NAME=facebook/webssl-mae300m-full2b-224; python3 scripts/verify_accuracy.py --threshold 1.0"],
+    "verification": "L2 relative error < 1%",
+    "expected": "PASSED"
+  }
+]

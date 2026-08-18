@@ -1,0 +1,14 @@
+[
+  {
+    "name": "full_deployment_npu_validation",
+    "prompt": "使用 dinov2-npu-deploy 完成 DINOv2 (vit_base_patch14_dinov2.lvd142m) 在 Ascend NPU 上的完整部署流程：环境初始化、NPU 检查、权重下载、单张图片推理验证、CPU vs NPU fp32/fp16 精度对比并生成精度报告。要求每一步执行用户确认检查点。"
+  },
+  {
+    "name": "precision_performance_benchmark",
+    "prompt": "为 DINOv2 模型运行完整的精度与性能基准测试。需要分别测试 fp32 和 fp16 精度下的 CPU vs NPU 余弦相似度和绝对误差，以及 batch_size=1/4/8 时的延迟和吞吐量。给出 pass/fail 判定，并输出 eval_report.json。"
+  },
+  {
+    "name": "error_recovery_scenarios",
+    "prompt": "模拟 DINOv2 NPU 部署中以下异常场景的处理：1) CANN 环境未加载导致 torch_npu 导入失败；2) ModelScope 下载超时需切换 HuggingFace 镜像；3) NPU 显存不足 OOM 需自动减小 batch_size 并回收显存。每步展示 fallback 策略和输出结果。"
+  }
+]

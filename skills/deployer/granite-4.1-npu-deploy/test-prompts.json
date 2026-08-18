@@ -1,0 +1,42 @@
+[
+  {
+    "id": "npu-env-verify",
+    "name": "NPU 环境验证",
+    "prompt": "验证华为昇腾 NPU 环境是否可用。",
+    "commands": ["python3 -c \"import torch; import torch_npu; print('NPU available:', torch.npu.is_available()); print('Device:', torch.npu.get_device_name(0))\""],
+    "verification": "NPU available: True 且设备名称无报错",
+    "expected": "NPU 环境正常"
+  },
+  {
+    "id": "inference-3b",
+    "name": "Granite 4.1-3B 推理",
+    "prompt": "在 NPU 上运行 Granite 4.1-3B 模型推理，验证代码生成能力。",
+    "commands": ["export ASCEND_RT_VISIBLE_DEVICES=0; python3 scripts/inference.py --model ibm-granite/granite-4.1-3b --prompt 'def fibonacci(n):' --max-new-tokens 64 --device npu"],
+    "verification": "生成语义通顺的代码续写",
+    "expected": "NPU 推理正常，~11 tok/s"
+  },
+  {
+    "id": "inference-8b",
+    "name": "Granite 4.1-8B 推理",
+    "prompt": "在 NPU 上运行 Granite 4.1-8B 模型推理。",
+    "commands": ["export ASCEND_RT_VISIBLE_DEVICES=0; python3 scripts/inference.py --model ibm-granite/granite-4.1-8b --prompt 'def fibonacci(n):' --max-new-tokens 64 --device npu"],
+    "verification": "生成语义通顺的代码续写",
+    "expected": "NPU 推理正常，~8 tok/s"
+  },
+  {
+    "id": "inference-30b",
+    "name": "Granite 4.1-30B 多卡推理",
+    "prompt": "在 NPU 多卡上运行 Granite 4.1-30B 模型推理。",
+    "commands": ["export ASCEND_RT_VISIBLE_DEVICES=0,1,2,3; python3 scripts/inference.py --model ibm-granite/granite-4.1-30b --prompt 'Write a Python function' --max-new-tokens 64 --device npu"],
+    "verification": "多卡分布式推理成功",
+    "expected": "NPU 推理正常，~5 tok/s"
+  },
+  {
+    "id": "weight-download",
+    "name": "权重下载验证",
+    "prompt": "从 HuggingFace 下载 Granite 4.1-3B 模型权重。",
+    "commands": ["export HF_ENDPOINT=https://hf-mirror.com; python3 -c \"from transformers import AutoModelForCausalLM, AutoTokenizer; AutoTokenizer.from_pretrained('ibm-granite/granite-4.1-3b'); print('Downloaded: ibm-granite/granite-4.1-3b')\""],
+    "verification": "权重下载成功",
+    "expected": "Downloaded: ibm-granite/granite-4.1-3b"
+  }
+]

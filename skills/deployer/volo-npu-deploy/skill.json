@@ -1,0 +1,25 @@
+{
+  "name": "volo-npu-deploy",
+  "version": "1.0.0",
+  "description": "VOLO 系列模型在昇腾 NPU 上的完整部署与推理验证 Skill",
+  "category": "NPU-Model-Deploy",
+  "tags": ["ascend", "npu", "volo", "timm", "image-classification", "pytorch", "cv", "transformer", "vision-outlooker"],
+  "models": [
+    "volo_d1_224.sail_in1k",
+    "volo_d1_384.sail_in1k",
+    "volo_d2_224.sail_in1k",
+    "volo_d2_384.sail_in1k",
+    "volo_d3_224.sail_in1k",
+    "volo_d3_448.sail_in1k",
+    "volo_d4_224.sail_in1k",
+    "volo_d4_448.sail_in1k",
+    "volo_d5_224.sail_in1k",
+    "volo_d5_448.sail_in1k",
+    "volo_d5_512.sail_in1k"
+  ],
+  "dependencies": ["torch", "torch_npu", "timm", "Pillow", "numpy", "safetensors", "modelscope", "scipy"],
+  "hardware": "Ascend910",
+  "framework": "PyTorch",
+  "task_type": "image-classification",
+  "repository": "https://gitcode.com/m0_74196153/volo_d1_224-npu"
+}

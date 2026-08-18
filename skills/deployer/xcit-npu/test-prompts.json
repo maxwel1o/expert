@@ -1,0 +1,30 @@
+[
+  {
+    "prompt": "我需要在昇腾 NPU 上部署 XCiT tiny 24 patch8 384 图像分类模型并进行精度对比验证，请按照 SKILL.md 的完整工作流指导我完成环境检查、依赖安装、模型下载、CPU/NPU 推理、精度对比和仓库发布。",
+    "expected_behaviors": [
+      "npu-smi 检查设备状态",
+      "安装 torch_npu 和 timm 依赖",
+      "下载 xcit_tiny_24_p8_384 模型权重",
+      "在 CPU 和 NPU 上执行推理并计算精度指标",
+      "生成精度对比报告"
+    ]
+  },
+  {
+    "prompt": "我的 NPU 推理结果显示最大概率差异为 0.4423%，余弦相似度为 0.999947，请分析精度是否达标，并指导我生成 README 和截图发布到 GitCode。",
+    "expected_behaviors": [
+      "确认精度达标（< 1%）",
+      "生成 terminal_output HTML 截图",
+      "指导完成 README 编写",
+      "使用 GitCode API 创建仓库并推送"
+    ]
+  },
+  {
+    "prompt": "我在 XCiT 模型部署过程中遇到 NPU 显存不足和 git push 超时的错误，请根据 SKILL.md 中的异常处理表指导我进行问题排查和恢复。",
+    "expected_behaviors": [
+      "检查 NPU OOM 问题并建议 batch_size=1 串行执行",
+      "建议释放 NPU 显存: torch.npu.empty_cache()",
+      "git push 超时则建议使用 GitCode API 上传替代",
+      "提供 fallback 恢复方案"
+    ]
+  }
+]

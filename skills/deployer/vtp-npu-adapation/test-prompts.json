@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "我想在昇腾 NPU 上部署 VTP-Base 模型进行图像重建，请给出完整步骤",
+    "expected": "应提供环境初始化、依赖安装、权重下载、源码获取、RoPE修复、推理验证的完整NPU部署流程"
+  },
+  {
+    "id": 2,
+    "prompt": "VTP-Large 在 NPU 上推理时出现 OOM，如何处理？",
+    "expected": "应提供减小batch、启用fp16精度、检查NPU内存占用、清理其他进程等OOM解决方案"
+  },
+  {
+    "id": 3,
+    "prompt": "VTP 模型在 NPU 上重建图像精度与 CPU 不一致怎么办",
+    "expected": "应指出RoPE dtype精度修复方法，提供adapt_model_for_npu函数和回滚策略"
+  }
+]

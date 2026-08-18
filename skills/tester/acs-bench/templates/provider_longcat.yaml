@@ -1,0 +1,12 @@
+# ============================================================
+# Provider 配置 — LongCat-Flash-Chat on ModelArts MaaS
+# ============================================================
+# ⚠️ 此文件包含敏感信息，不要提交到版本控制
+# Tokenizer: $PROF_ROOT/models/LongCat-Flash-Chat
+
+providers:
+  - id: 'mt_test'
+    name: 'longcat-flash-chat'
+    api_key: '<YOUR_API_KEY>'
+    base_url: 'https://api.modelarts-maas.com/v1'
+    model_name: 'longcat-flash-chat'  # ⚠️ 必须用可读名，禁止用UUID（UUID重新部署后会过期404）

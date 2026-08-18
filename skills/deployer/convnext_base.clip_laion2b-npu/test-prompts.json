@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "prompt": "在昇腾 Ascend910B4 NPU 上部署 convnext_base.clip_laion2b 模型并完成推理和精度验证",
+        "expected": "完成环境初始化、NPU检测、模型权重加载、CPU基线推理、NPU推理、精度对比（50样本）、性能基准测试，输出精度和性能报告"
+    },
+    {
+        "id": 2,
+        "prompt": "NPU 不可用时回退到 CPU 完成 convnext_base.clip_laion2b 推理",
+        "expected": "检测到 NPU 不可用后自动回退 CPU，输出推理结果并标记 fallback 状态"
+    },
+    {
+        "id": 3,
+        "prompt": "运行 convnext_base.clip_laion2b 模型的性能基准测试，测试 CPU 和 NPU 在不同 batch size 下的延迟和吞吐量",
+        "expected": "完成 batch size [1,2,4,8,16,32] 的 CPU/NPU 延迟和吞吐量测试，输出性能基准报告"
+    }
+]

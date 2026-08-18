@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 tinynet_e 模型到 NPU 并执行推理和精度验证",
+        "expected": "完成 CPU/NPU 推理、精度对比，余弦相似度 > 0.999，误差 < 1%，输出推理结果和对比报告"
+    },
+    {
+        "id": 2,
+        "prompt": "串行处理 tinynet_e、tinynet_d、tinynet_c、tinynet_b、tinynet_a 全部五个模型",
+        "expected": "五个模型依次串行执行，每个完成后释放 NPU 显存，精度均 < 1%"
+    },
+    {
+        "id": 3,
+        "prompt": "NPU 不可用时回退到 CPU 完成 tinynet_d 推理",
+        "expected": "检测 NPU 不可用后自动回退 CPU，输出推理结果并标记 fallback"
+    },
+    {
+        "id": 4,
+        "prompt": "对 tinynet_b 执行 CPU 与 NPU 精度对比，生成终端截图",
+        "expected": "完成 CPU/NPU 推理和精度对比，生成 terminal_output.txt 和 terminal_output.html"
+    },
+    {
+        "id": 5,
+        "prompt": "运行 run_all.sh 全量批量处理所有 TinyNet 模型",
+        "expected": "按 tinynet_e → d → c → b → a 顺序执行推理、对比和截图生成"
+    }
+]

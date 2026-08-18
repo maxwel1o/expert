@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "帮我将 kotoba-whisper-v1.0 部署到昇腾 NPU 上，完成环境初始化、权重下载和 NPU 推理验证",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["环境初始化", "NPU 基础验证", "模型选择", "NPU 推理"],
+    "checkpoints": ["CANN 环境加载", "NPU 状态确认", "推理成功"]
+  },
+  {
+    "prompt": "在 Ascend910B4 上运行 kotoba-whisper 的精度验证，对比 NPU 和 CPU 的 logits 输出余弦相似度",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["精度验证", "结果分析"],
+    "checkpoints": ["余弦相似度 > 0.99", "eval JSON 输出"]
+  },
+  {
+    "prompt": "对 kotoba-whisper-bilingual-v1.0 进行 NPU 性能基准测试，对比 CPU 加速比",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["性能基准测试", "结果分析"],
+    "checkpoints": ["加速比 > 5x", "性能 JSON 输出"]
+  },
+  {
+    "prompt": "我要在 NPU 上用日语语音识别跑 kotoba-whisper-v2.0 推理，给一段 wav 音频文件",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["NPU 推理"],
+    "checkpoints": ["推理无报错", "输出转写文本"]
+  },
+  {
+    "prompt": "请帮我完成 kotoba-whisper 全 6 个模型的昇腾 NPU 部署验证，包括精度对比和性能测试，并汇总结果",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["环境初始化", "NPU 基础验证", "模型选择", "NPU 推理", "精度验证", "性能基准测试", "结果归档"],
+    "checkpoints": ["所有模型通过", "结果归档完整"]
+  },
+  {
+    "prompt": "在 NPU 上推理 kotoba-whisper-v2.1 时遇到 OOM 该如何处理？",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["边界条件处理", "异常恢复"],
+    "checkpoints": ["OOM 恢复策略"]
+  },
+  {
+    "prompt": "如何解决国内网络环境下 kotoba-whisper 权重下载失败的问题？",
+    "expected_skill": "kotoba-whisper-npu-deploy",
+    "expected_steps": ["环境初始化"],
+    "checkpoints": ["HF_ENDPOINT 设置", "retry 策略"]
+  }
+]

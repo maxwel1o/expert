@@ -1,0 +1,18 @@
+[
+  {
+    "name": "single_model_npu_inference",
+    "prompt": "使用 vit_small_patch16_dinov3.lvd1689m-npu 部署 vit_small_patch16_dinov3.lvd1689m，在 Ascend NPU 上完成环境初始化、依赖安装、模型加载、NPU 推理验证，要求输出推理延迟和特征向量。"
+  },
+  {
+    "name": "cpu_npu_precision_comparison",
+    "prompt": "使用 vit_small_patch16_dinov3.lvd1689m-npu 对 vit_small_patch16_dinov3.lvd1689m 执行 CPU 基线推理和 NPU 推理，完成 CPU/NPU 精度对比（余弦相似度、归一化 MAE），要求输出精度对比报告并确认 cosine similarity > 0.999。"
+  },
+  {
+    "name": "performance_benchmark_sweep",
+    "prompt": "使用 vit_small_patch16_dinov3.lvd1689m-npu 对 vit_small_patch16_dinov3.lvd1689m 执行 batch size sweep 性能基准测试（bs=1,2,4,8），输出延迟和吞吐量数据，生成 evaluation_report.json。"
+  },
+  {
+    "name": "npu_unavailable_fallback",
+    "prompt": "使用 vit_small_patch16_dinov3.lvd1689m-npu 部署模型，模拟 NPU 不可用（torch.npu.is_available() 为 False）时 fallback 到 CPU dry-run，禁止写入 NPU 通过结论。"
+  }
+]

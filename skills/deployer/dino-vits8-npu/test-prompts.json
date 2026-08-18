@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "在昇腾NPU上部署DINO ViT-S/8模型，完成环境初始化、权重下载、NPU推理验证和CPU/NPU精度对比",
+    "expected": "输出完整的8步执行流程：环境初始化与NPU检测、代码与权重获取、NPU自动迁移验证、单图推理验证、随机输入精度对比、真实图像精度对比、多模型串行执行、验收确认。包含具体命令、预期输出和精度对比结果（L2相对误差<1%）。"
+  },
+  {
+    "id": 2,
+    "prompt": "DINO ViT-S/8在NPU上的推理速度如何？精度能否达到要求？执行精度对比测试",
+    "expected": "执行CPU和NPU的双端推理，输出推理耗时对比（CPU约50-200ms，NPU约3-15ms），以及精度对比指标：Max absolute difference、Mean absolute difference、L2 relative error，并给出PASS/FAIL判定。"
+  },
+  {
+    "id": 3,
+    "prompt": "我有一张测试图片，想在昇腾NPU上用DINO ViT-S/8提取特征向量，并验证与CPU结果的一致性",
+    "expected": "提供完整操作步骤：先准备测试图片并执行inference.py进行NPU单图推理得到384维特征向量，再通过eval_accuracy.py对比CPU和NPU输出的一致性。输出特征向量的前10个值和精度检查结果。"
+  }
+]

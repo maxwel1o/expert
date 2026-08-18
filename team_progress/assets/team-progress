@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+export PYTHONPATH="/opt/data/team-progress/lib${PYTHONPATH:+:$PYTHONPATH}"
+export TEAM_PROGRESS_DB="${TEAM_PROGRESS_DB:-/opt/data/team-progress/state/progress.db}"
+
+exec python3 -m team_progress.cli "$@"
+

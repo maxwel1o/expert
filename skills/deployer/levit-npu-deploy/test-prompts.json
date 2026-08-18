@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "请帮我完成 LeViT-128 和 LeViT-256 两个模型在 Ascend910 NPU 上的部署与精度验证。先检查环境依赖是否正确安装，然后串行执行两个模型的 NPU 推理，再对比 CPU 和 NPU 的推理精度，确保概率最大误差小于 1%，最后生成 README 和终端截图。",
+    "expected_steps": [
+      "环境准备 (依赖安装)",
+      "NPU 推理 (串行执行两个模型)",
+      "CPU 推理",
+      "CPU/NPU 精度对比",
+      "README 生成",
+      "截图生成"
+    ],
+    "expected_outputs": [
+      "每个模型的推理结果 JSON",
+      "精度对比报告 (误差 < 1%)",
+      "README 文档",
+      "终端截图 PNG"
+    ]
+  },
+  {
+    "prompt": "我需要将 LeViT-384 模型部署到 NPU 上并发布到 GitCode 模型仓库。请帮我执行完整的发布流程：NPU 推理验证精度、生成包含精度对比表格的中文 README、生成终端截图，最后通过 GitCode API 创建仓库并推送代码。",
+    "expected_steps": [
+      "NPU 推理验证",
+      "CPU 推理 (用于对比)",
+      "精度对比",
+      "README 生成",
+      "截图生成",
+      "GitCode 仓库创建与推送"
+    ],
+    "expected_outputs": [
+      "推理结果 JSON",
+      "精度对比报告",
+      "GitCode 模型仓库 README",
+      "终端截图",
+      "GitCode 仓库 URL"
+    ]
+  },
+  {
+    "prompt": "我在运行 LeViT 模型 NPU 推理时遇到了显存不足的问题，需要同时处理 5 个 LeViT 模型变体（128、128S、192、256、384），但 NPU 显存只有 64GB。请帮我设计串行执行方案，每个模型完成后释放显存，并排查是否存在显存泄漏。",
+    "expected_steps": [
+      "识别显存不足原因",
+      "设计串行执行方案",
+      "配置显存释放 (gc.collect + torch.npu.empty_cache)",
+      "串行执行所有模型",
+      "验证推理结果"
+    ],
+    "expected_outputs": [
+      "串行执行脚本配置",
+      "显存释放策略",
+      "所有模型的推理结果"
+    ]
+  }
+]

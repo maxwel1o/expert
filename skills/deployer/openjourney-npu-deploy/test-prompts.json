@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "prompt": "使用 openjourney-npu 在 Ascend NPU 上部署 prompthero/openjourney 文生图模型，执行环境初始化和依赖安装",
+        "expected": "完成 CANN 环境加载、torch_npu/diffusers 安装，npu-smi info 确认设备 OK，python3 验证 torch_npu 导入成功"
+    },
+    {
+        "id": 2,
+        "prompt": "对 openjourney-npu 执行 NPU 张量基础验证，确认 torch_npu 算子可用性",
+        "expected": "torch.npu.device_count() >= 1，NPU 上成功执行 Tensor 加法，输出 device='npu:0' 无报错"
+    },
+    {
+        "id": 3,
+        "prompt": "使用 openjourney-npu 下载 prompthero/openjourney 模型权重并验证完整性",
+        "expected": "snapshot_download 完成 15GB 权重、unet/vae/text_encoder/tokenizer/scheduler 五个子目录均存在"
+    },
+    {
+        "id": 4,
+        "prompt": "使用 openjourney-npu 执行基础文生图推理，生成 512x512 Midjourney 风格图像",
+        "expected": "inference.py 成功生成 512x512 PNG，seed 42 输出确定且内容可辨识，无 NPU 报错"
+    },
+    {
+        "id": 5,
+        "prompt": "对 openjourney-npu 执行精度验证，比较 NPU float16 与 CPU float32 单步 UNet 输出误差",
+        "expected": "UNet 相对误差 < 1%（典型值 0.029%），确定性测试 max_diff = 0，精度验证 PASS"
+    },
+    {
+        "id": 6,
+        "prompt": "对 openjourney-npu 执行 10/20/30 步性能基准测试，记录 cold/warm 延迟和 Steps/s",
+        "expected": "成功输出 benchmark_results.json，10步 warm avg ~2.55s，20步 ~4.77s，30步 ~6.89s，偏差 < 20%"
+    },
+    {
+        "id": 7,
+        "prompt": "模拟 openjourney-npu 部署时模型下载中断的异常场景，验证 fallback 到 ModelScope 镜像下载",
+        "expected": "HF Mirror 下载失败后输出错误提示，fallback 至 ModelScope git clone 完成模型下载，验证完整性通过"
+    },
+    {
+        "id": 8,
+        "prompt": "模拟 openjourney-npu 部署时 NPU 设备 Offline 的异常场景，验证恢复策略",
+        "expected": "检测 NPU Offline 后输出错误提示，执行 npu-smi set -t reset 恢复确认，日志标注恢复操作"
+    },
+    {
+        "id": 9,
+        "prompt": "对 openjourney-npu 执行批量推理验证，多提示词串行生成并验证每张输出图片",
+        "expected": "3 个不同提示词均成功生成 512x512 图像，PIL 验证 img.size == (512,512)，全流程无报错"
+    },
+    {
+        "id": 10,
+        "prompt": "使用 openjourney-npu 完成全流程部署验收确认，逐项通过检查清单",
+        "expected": "五项检查全部 PASS：设备正常、torch_npu 导入 OK、推理图验证通过、精度 < 1%、性能基本符合"
+    }
+]

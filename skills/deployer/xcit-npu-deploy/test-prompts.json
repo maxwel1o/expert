@@ -1,0 +1,48 @@
+[
+  {
+    "prompt": "请帮我将 XCiT 系列模型部署到 Ascend910 NPU 上。先检查 NPU 环境是否正常，安装依赖，然后从 ModelScope 下载 xcit_tiny_12_p16_384 模型权重，分别在 CPU 和 NPU 上运行推理，对比计算精度差异，确保概率误差小于 1%。",
+    "expected_steps": [
+      "环境准备 (CANN + 依赖安装)",
+      "模型下载 (ModelScope)",
+      "NPU 推理",
+      "CPU 推理",
+      "CPU/NPU 精度对比"
+    ],
+    "expected_outputs": [
+      "NPU 状态确认",
+      "推理结果文件 (inference_output.pt)",
+      "精度对比报告 (误差 < 1%)"
+    ]
+  },
+  {
+    "prompt": "我有 5 个 XCiT 模型变体需要在 NPU 上串行完成推理验证，包括 tiny_12_p16_384、large_24_p8_224、medium_24_p16_384、tiny_12_p8_384 和 small_12_p8_224。请使用 run_all.sh 脚本串行执行所有模型，每个模型完成后确保释放 NPU 显存，避免 OOM。汇总所有模型的推理性能和精度数据。",
+    "expected_steps": [
+      "环境准备",
+      "串行下载所有模型权重",
+      "串行执行 NPU 推理",
+      "串行执行 CPU 推理",
+      "串行执行精度对比",
+      "汇总性能和精度报告"
+    ],
+    "expected_outputs": [
+      "每个模型的推理结果",
+      "精度对比报告",
+      "汇总性能表格"
+    ]
+  },
+  {
+    "prompt": "在部署 xcit_large_24_p8_224 模型到 NPU 时遇到了显存不足的问题。这个模型有 189M 参数，输入尺寸 224x224，但单卡显存不够用。请帮我排查原因，给出解决方案（如减小 batch size、调整 warmup 次数等），并验证修复后的推理结果。",
+    "expected_steps": [
+      "排查 OOM 原因",
+      "调整 batch size 或 warmup 参数",
+      "释放显存后重试推理",
+      "验证推理结果正确性",
+      "记录最小可行配置"
+    ],
+    "expected_outputs": [
+      "OOM 排查报告",
+      "调优后的推理配置",
+      "验证通过的推理结果"
+    ]
+  }
+]

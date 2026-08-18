@@ -1,0 +1,32 @@
+[
+    {
+        "id": "detr-env",
+        "name": "NPU 环境预检验证",
+        "prompt": "检查昇腾 NPU 环境是否就绪，加载 CANN 并验证 torch_npu",
+        "expected": "npu-smi info 显示设备正常，torch.npu.is_available() 返回 True"
+    },
+    {
+        "id": "detr-download",
+        "name": "模型下载验证",
+        "prompt": "下载 DETR-ResNet-50 模型权重和配置文件",
+        "expected": "下载 config.json、model.safetensors 到 /opt/atomgit/detr-resnet-50/"
+    },
+    {
+        "id": "detr-inference",
+        "name": "NPU 推理验证",
+        "prompt": "在昇腾 NPU 上运行 DETR 目标检测推理",
+        "expected": "正确检测 cat、couch、remote 等目标，置信度 > 0.9"
+    },
+    {
+        "id": "detr-accuracy",
+        "name": "精度对比验证",
+        "prompt": "运行精度测试脚本对比 CPU 和 NPU 输出差异",
+        "expected": "Logits 和 Boxes 相对误差均 < 1%"
+    },
+    {
+        "id": "detr-error",
+        "name": "异常处理验证",
+        "prompt": "模拟 timm 未安装场景，测试 fallback 策略",
+        "expected": "提示 pip install timm 安装依赖"
+    }
+]

@@ -1,0 +1,93 @@
+{
+  "name": "pp-ocrv3-npu",
+  "description": "PP-OCRv3 多语言 OCR 模型昇腾 NPU 部署与验证 Skill。自动完成模型下载、NPU推理、CPU/NPU精度对比、README生成、模型仓库发布。支持16个多语言检测和识别模型的串行适配。",
+  "version": "1.0.0",
+  "author": "Ascend NPU Adaptation Team",
+  "tags": ["ocr", "pp-ocrv3", "npu", "ascend", "deployment", "precision-test"],
+  "inputs": {
+    "models": {
+      "type": "array",
+      "description": "模型列表，每个模型包含 model_id, task, model_file 等字段",
+      "required": true
+    },
+    "test_image": {
+      "type": "string",
+      "description": "测试图像路径",
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "description": "ONNX Runtime 执行提供者: CPUExecutionProvider 或 CANNExecutionProvider",
+      "default": "CANNExecutionProvider",
+      "required": false
+    }
+  },
+  "outputs": {
+    "compare_result": {
+      "type": "json",
+      "description": "每个模型的 CPU/NPU 精度对比结果 JSON 文件"
+    },
+    "readme": {
+      "type": "markdown",
+      "description": "每个模型的中文 README 文档，包含真实测试数据"
+    },
+    "repo_url": {
+      "type": "string",
+      "description": "每个模型的 GitCode 模型仓库地址"
+    }
+  },
+  "scripts": {
+    "process_all": "scripts/process_all_models.py",
+    "inference": "scripts/inference.py",
+    "compare": "scripts/compare_cpu_npu.py",
+    "generate_readme": "scripts/generate_readmes.py"
+  },
+  "supported_models": [
+    "Multilingual_PP-OCRv3_det_infer",
+    "ch_PP-OCRv3_det_infer",
+    "en_PP-OCRv3_det_infer",
+    "en_PP-OCRv3_det_infer_somohk",
+    "arabic_PP-OCRv3_rec_infer",
+    "ch_PP-OCRv3_rec_infer",
+    "chinese_cht_PP-OCRv3_rec_infer",
+    "cyrillic_PP-OCRv3_rec_infer",
+    "devanagari_PP-OCRv3_rec_infer",
+    "en_PP-OCRv3_rec_infer",
+    "japan_PP-OCRv3_rec_infer",
+    "ka_PP-OCRv3_rec_infer",
+    "korean_PP-OCRv3_rec_infer",
+    "latin_PP-OCRv3_rec_infer",
+    "ta_PP-OCRv3_rec_infer",
+    "te_PP-OCRv3_rec_infer"
+  ],
+  "model_repos": {
+    "Multilingual_PP-OCRv3_det_infer": "https://gitcode.com/gcw_C8PI9e90/Multilingual_PP-OCRv3_det_infer-npu",
+    "ch_PP-OCRv3_det_infer": "https://gitcode.com/gcw_C8PI9e90/ch_PP-OCRv3_det_infer-npu",
+    "en_PP-OCRv3_det_infer": "https://gitcode.com/gcw_C8PI9e90/en_PP-OCRv3_det_infer-npu",
+    "en_PP-OCRv3_det_infer_somohk": "https://gitcode.com/gcw_C8PI9e90/en_PP-OCRv3_det_infer_somohk-npu",
+    "arabic_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/arabic_PP-OCRv3_rec_infer-npu",
+    "ch_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/ch_PP-OCRv3_rec_infer-npu",
+    "chinese_cht_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/chinese_cht_PP-OCRv3_rec_infer-npu",
+    "cyrillic_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/cyrillic_PP-OCRv3_rec_infer-npu",
+    "devanagari_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/devanagari_PP-OCRv3_rec_infer-npu",
+    "en_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/en_PP-OCRv3_rec_infer-npu",
+    "japan_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/japan_PP-OCRv3_rec_infer-npu",
+    "ka_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/ka_PP-OCRv3_rec_infer-npu",
+    "korean_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/korean_PP-OCRv3_rec_infer-npu",
+    "latin_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/latin_PP-OCRv3_rec_infer-npu",
+    "ta_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/ta_PP-OCRv3_rec_infer-npu",
+    "te_PP-OCRv3_rec_infer": "https://gitcode.com/gcw_C8PI9e90/te_PP-OCRv3_rec_infer-npu"
+  },
+  "dependencies": {
+    "python": ">=3.10",
+    "pip_packages": [
+      "onnxruntime-cann>=1.24.0",
+      "numpy>=1.21.0",
+      "opencv-python-headless>=4.5.0",
+      "onnx>=1.12.0",
+      "modelscope>=1.0.0"
+    ],
+    "hardware": "Ascend 910B NPU",
+    "cann": ">=8.0.0"
+  }
+}

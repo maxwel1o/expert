@@ -1,0 +1,61 @@
+[
+  {
+    "prompt": "用 pyannote.audio 在昇腾 NPU 上部署 speaker-diarization-community-1 说话人日志模型并进行推理验证。先检查环境，加载 CANN，确认 NPU 可用，安装 torch_npu 和 pyannote.audio 依赖。然后从 GitCode 下载模型权重，应用 NPU 适配补丁（torchcodec 替换、FFT 路由到 CPU、设备检测替换）。运行 inference.py 对测试音频进行说话人分离推理，输出说话人片段时间和 Embedding。最后运行 evaluate.py 对比 NPU 和 CPU 输出的 DER 精度。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "安装依赖",
+      "NPU 基础验证",
+      "下载模型权重",
+      "推理验证",
+      "精度对比验证",
+      "性能评测",
+      "验收确认"
+    ],
+    "expected_tools": [
+      "npu-smi",
+      "pip",
+      "python3 scripts/inference.py",
+      "python3 scripts/evaluate.py"
+    ],
+    "expected_artifacts": [
+      "result.json",
+      "evals.json"
+    ],
+    "tags": ["speaker-diarization", "npu", "ascend", "pyannote", "inference", "precision-verification"]
+  },
+  {
+    "prompt": "在昇腾 NPU 上运行 speaker-diarization 说话人日志模型的精度评估。使用 evaluate.py 脚本自动生成多说话人测试音频，对 community-1 和 basic 两种模型分别运行 NPU 推理和 CPU 推理，计算 DiarizationErrorRate (DER)，确认 DER 小于 1%。记录 NPU 和 CPU 推理耗时，计算 NPU 加速比。汇总所有评测结果。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "安装依赖",
+      "NPU 基础验证",
+      "下载模型权重",
+      "精度对比验证",
+      "性能评测"
+    ],
+    "expected_tools": [
+      "python3 scripts/evaluate.py",
+      "torch.npu.synchronize()"
+    ],
+    "expected_artifacts": [
+      "evals.json"
+    ],
+    "tags": ["speaker-diarization", "npu", "precision", "der", "benchmark"]
+  },
+  {
+    "prompt": "NPU 不可用时回退到 CPU 推理。在执行 speaker-diarization 说话人日志模型部署时检测到 NPU 不可用（torch.npu.is_available() 为 False），自动切换到 CPU 执行推理并在输出中标记 fallback。精度对比基于 NPU 不可用的场景，所有推理在 CPU 上完成。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "安装依赖",
+      "下载模型权重",
+      "推理验证（回退到 CPU）",
+      "精度对比验证"
+    ],
+    "expected_tools": [
+      "torch.npu.is_available()",
+      "python3 scripts/inference.py --device cpu"
+    ],
+    "expected_fallback_behavior": "NPU 不可用时自动回退到 CPU 推理，输出标记 NPU_FALLBACK=true",
+    "tags": ["speaker-diarization", "fallback", "cpu", "edge-case"]
+  }
+]

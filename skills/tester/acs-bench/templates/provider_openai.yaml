@@ -1,0 +1,7 @@
+providers:
+  - id: 'openai'
+    name: 'openai'
+    api_key: '<api-key>'
+    base_url: 'https://api.openai.com/v1'
+    model_name: '<model-name>'
+    model_category: '<model-category>'

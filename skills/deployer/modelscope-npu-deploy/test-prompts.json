@@ -1,0 +1,57 @@
+[
+  {
+    "prompt": "请帮我将 ModelScope 上的 cv_resnest101_general_recognition 模型部署到 Ascend910 NPU 上。需要完成以下步骤：检查 NPU 环境是否正常、从 ModelScope 下载模型权重、将 OpenMMLab 格式的权重转换为 timm 格式、编写支持 CPU 和 NPU 的推理脚本、分别在 CPU 和 NPU 上运行推理、对比两者精度差异是否小于 1%，并生成终端截图。",
+    "expected_steps": [
+      "NPU 环境检查 (npu-smi info, torch_npu import)",
+      "ModelScope 模型下载",
+      "权重格式转换 (OpenMMLab → timm)",
+      "编写 inference.py",
+      "CPU 推理",
+      "NPU 推理",
+      "CPU/NPU 精度对比",
+      "截图生成"
+    ],
+    "expected_outputs": [
+      "NPU 状态确认",
+      "模型权重文件 (pytorch_model.pt)",
+      "转换后的推理脚本",
+      "CPU/NPU 推理结果 JSON",
+      "精度对比报告 (MaxAE < 1%)",
+      "终端截图 PNG"
+    ]
+  },
+  {
+    "prompt": "我需要适配 cv_pathshift_action-recognition 这个视频行为识别模型到昇腾 NPU。这是一个视频分类模型，有 400 个类别，使用 PathShift Transformer 架构。请说明如何处理视频输入预处理（.npy 文件），如何加载 ModelScope 原生模型类（不使用 timm），并完成 CPU 和 NPU 的推理验证。",
+    "expected_steps": [
+      "环境初始化",
+      "模型下载 (ModelScope)",
+      "视频预处理 (T, H, W, C → C, T, H, W)",
+      "ModelScope 原生模型加载",
+      "CPU 推理",
+      "NPU 推理",
+      "精度对比"
+    ],
+    "expected_outputs": [
+      "视频预处理脚本",
+      "原生模型加载代码",
+      "CPU/NPU 推理结果",
+      "精度对比报告"
+    ]
+  },
+  {
+    "prompt": "我在部署 ModelScope CV 模型到 NPU 时遇到了精度问题，CPU 和 NPU 的推理结果概率最大绝对误差达到了 3.5%，超过了 1% 的阈值。请帮我排查可能的原因，包括预处理一致性检查、数据类型对齐、权重加载是否正确，并给出修复方案。",
+    "expected_steps": [
+      "检查 CPU/NPU 预处理管道一致性 (resize, crop, normalize)",
+      "检查数据类型对齐 (fp32 vs fp16)",
+      "验证权重加载状态 (missing/unexpected keys)",
+      "重跑精度对比",
+      "给出修复建议"
+    ],
+    "expected_outputs": [
+      "预处理一致性检查报告",
+      "数据类型对齐分析",
+      "精度修复方案",
+      "回滚策略说明"
+    ]
+  }
+]

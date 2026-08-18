@@ -1,0 +1,14 @@
+# ============================================================
+# Provider 配置 — 远程vLLM推理服务
+# ============================================================
+# ⚠️ 此文件包含敏感信息，不要提交到版本控制
+# ⚠️ model_name: vLLM服务通常注册为'auto'，需先GET /v1/models确认
+# ⚠️ api_key: 无鉴权服务填'EMPTY'
+# ⚠️ base_url: 远程vLLM用http://（非https）
+
+providers:
+  - id: 'mt_test'
+    name: 'auto'
+    api_key: 'EMPTY'
+    base_url: 'http://<VLLM_IP>:<VLLM_PORT>/v1'
+    model_name: 'auto'

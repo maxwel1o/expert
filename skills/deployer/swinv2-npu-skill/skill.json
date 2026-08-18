@@ -1,0 +1,74 @@
+{
+  "name": "swinv2-npu-skill",
+  "display_name": "SwinV2 NPU Deployment Skill",
+  "version": "1.0.0",
+  "description": "Automate SwinV2 model adaptation, inference, CPU/NPU precision comparison, README generation, screenshot generation and model repo publishing on Ascend NPU.",
+  "author": "m0_74196153",
+  "tags": ["swinv2", "npu", "ascend", "image-classification", "timm", "pytorch"],
+  "supported_models": [
+    "swinv2_tiny_window8_256.ms_in1k",
+    "swinv2_tiny_window16_256.ms_in1k",
+    "swinv2_small_window8_256.ms_in1k",
+    "swinv2_small_window16_256.ms_in1k",
+    "swinv2_large_window12to24_192to384.ms_in22k_ft_in1k",
+    "swinv2_large_window12to16_192to256.ms_in22k_ft_in1k",
+    "swinv2_large_window12_192.ms_in22k",
+    "swinv2_cr_tiny_ns_224.sw_in1k",
+    "swinv2_cr_small_ns_224.sw_in1k",
+    "swinv2_cr_small_224.sw_in1k",
+    "swinv2_base_window8_256.ms_in1k",
+    "swinv2_base_window16_256.ms_in1k",
+    "swinv2_base_window12to24_192to384.ms_in22k_ft_in1k",
+    "swinv2_base_window12to16_192to256.ms_in22k_ft_in1k",
+    "swinv2_base_window12_192.ms_in22k"
+  ],
+  "inputs": {
+    "model_name": {
+      "type": "string",
+      "description": "SwinV2 model name from the supported_models list",
+      "required": true
+    },
+    "test_image": {
+      "type": "string",
+      "description": "Path to test image for inference",
+      "required": false,
+      "default": "https://github.com/pytorch/hub/raw/master/images/dog.jpg"
+    },
+    "modelscope_cache_dir": {
+      "type": "string",
+      "description": "ModelScope cache directory for model weights",
+      "required": false,
+      "default": "./modelscope_cache"
+    },
+    "batch_mode": {
+      "type": "boolean",
+      "description": "Run all models sequentially",
+      "required": false,
+      "default": false
+    }
+  },
+  "outputs": {
+    "inference_results": "results/inference_results.json",
+    "comparison_results": "results/comparison_results.json",
+    "readme": "readme.md",
+    "screenshot": "terminal_screenshot.png"
+  },
+  "dependencies": {
+    "python": ">=3.10",
+    "pytorch": ">=2.0.0",
+    "torch_npu": ">=2.1.0",
+    "timm": ">=1.0.0",
+    "pillow": ">=10.0.0",
+    "modelscope": ">=1.0.0"
+  },
+  "hardware_requirements": {
+    "npu": "Ascend 910",
+    "npu_memory": ">=16GB",
+    "cann": ">=8.0"
+  },
+  "references": {
+    "upstream_repo": "https://gitcode.com/Ascend/model-agent",
+    "skill_path": "skills/deployment/swinv2-npu-skill/",
+    "model_repos": "https://gitcode.com/m0_74196153?tab=models"
+  }
+}

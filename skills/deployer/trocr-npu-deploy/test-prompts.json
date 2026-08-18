@@ -1,0 +1,52 @@
+[
+  {
+    "prompt": "I want to deploy TrOCR on Ascend NPU for OCR inference",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "intent"
+  },
+  {
+    "prompt": "How do I run TrOCR base printed model on NPU?",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "usage"
+  },
+  {
+    "prompt": "Set up trocr small handwritten on Ascend 910",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "setup"
+  },
+  {
+    "prompt": "Compare NPU vs CPU accuracy for TrOCR large printed",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "evaluation"
+  },
+  {
+    "prompt": "Why is my TrOCR output empty on NPU?",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "Download TrOCR model weights from HuggingFace mirror",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "setup"
+  },
+  {
+    "prompt": "Run inference benchmark for trocr base handwritten on npu",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "usage"
+  },
+  {
+    "prompt": "Check NPU self-consistency for TrOCR models",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "evaluation"
+  },
+  {
+    "prompt": "Fix torch_npu module not found error for TrOCR",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "troubleshooting"
+  },
+  {
+    "prompt": "TrOCR NPU inference encoder numerical difference",
+    "expected_skill": "trocr-npu-deploy",
+    "category": "evaluation"
+  }
+]

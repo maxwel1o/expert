@@ -1,0 +1,58 @@
+[
+  {
+    "id": "npu-env-verify",
+    "name": "NPU 环境验证",
+    "prompt": "验证华为昇腾 NPU 环境是否可用，检查 torch_npu 导入和基本张量运算。",
+    "commands": ["python3 -c \"import torch; import torch_npu; a = torch.randn(3,4).npu(); print(a + a)\""],
+    "verification": "输出包含 device='npu:0' 的 Tensor 且无报错",
+    "expected": "NPU 环境正常"
+  },
+  {
+    "id": "base-loss",
+    "name": "Base 模型 loss 验证",
+    "prompt": "运行 acestep-v15-xl-base 模型的 training_loss 前向验证，确认 loss 值在合理范围内。",
+    "commands": ["python3 scripts/inference.py --model-path ./model_cache/ACE-Step/acestep-v15-xl-base --device npu --dtype bfloat16 --mode loss --infer-steps 50 --guidance-scale 7.0 --seed 42"],
+    "verification": "loss 值在 0.4 左右",
+    "expected": "Loss ~0.425781"
+  },
+  {
+    "id": "base-gen",
+    "name": "Base 模型生成验证",
+    "prompt": "运行 acestep-v15-xl-base 模型的 generate_audio 生成验证，确认 latents 输出 shape 正确。",
+    "commands": ["python3 scripts/inference.py --model-path ./model_cache/ACE-Step/acestep-v15-xl-base --device npu --dtype bfloat16 --mode gen --infer-steps 50 --guidance-scale 7.0 --seed 42"],
+    "verification": "输出 shape 为 (batch, seq_len, 64) 的 latents",
+    "expected": "Generated latents shape: (1, 250, 64)"
+  },
+  {
+    "id": "sft-loss",
+    "name": "SFT 模型 loss 验证",
+    "prompt": "运行 acestep-v15-xl-sft 模型的 training_loss 验证。",
+    "commands": ["python3 scripts/inference.py --model-path ./model_cache/ACE-Step/acestep-v15-xl-sft --device npu --dtype bfloat16 --mode loss --infer-steps 50 --guidance-scale 7.0 --seed 42"],
+    "verification": "loss 值在 0.8 左右",
+    "expected": "Loss ~0.777344"
+  },
+  {
+    "id": "turbo-loss",
+    "name": "Turbo 模型 loss 验证",
+    "prompt": "运行 acestep-v15-xl-turbo 模型的 training_loss 验证（8步无 CFG）。",
+    "commands": ["python3 scripts/inference.py --model-path ./model_cache/ACE-Step/acestep-v15-xl-turbo --device npu --dtype bfloat16 --mode loss --infer-steps 8 --guidance-scale 1.0 --seed 42"],
+    "verification": "loss 值在 0.06 左右",
+    "expected": "Loss ~0.059814"
+  },
+  {
+    "id": "accuracy-verify",
+    "name": "精度对比验证",
+    "prompt": "对比 NPU 与 CPU 上的 loss 结果，验证 bf16 精度相对误差在 1% 以内。",
+    "commands": ["python3 scripts/verify_accuracy.py --model-path ./model_cache/ACE-Step/acestep-v15-xl-base --seed 42 --threshold 1.0"],
+    "verification": "相对误差 < 1%",
+    "expected": "PASSED"
+  },
+  {
+    "id": "serial-eval",
+    "name": "串行评测",
+    "prompt": "串行执行三个模型的精度验证，避免 NPU 显存溢出。",
+    "commands": ["for model in acestep-v15-xl-base acestep-v15-xl-sft acestep-v15-xl-turbo; do python3 scripts/verify_accuracy.py --model-path ./model_cache/ACE-Step/$model --seed 42 --threshold 1.0 --skip-cpu; python3 -c 'import torch; import torch_npu; torch.npu.empty_cache()'; done"],
+    "verification": "全部模型 PASSED",
+    "expected": "All models passed"
+  }
+]

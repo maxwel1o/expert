@@ -1,0 +1,58 @@
+[
+  {
+    "prompt": "在昇腾 NPU 上部署 wav2vec2-large-xls-r-300m-Urdu 乌尔都语语音识别模型。先检查环境，加载 CANN，确认 NPU 可用（npu-smi info），安装依赖（torch_npu、transformers、soundfile、pyctcdecode），然后使用 HF 镜像下载模型权重。运行 CPU 基线推理（合成音频），再运行 NPU 推理（transfer_to_npu），对比 CPU/NPU 精度（Token 预测一致率 >= 99%）。最后生成精度验证报告。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "安装依赖与模型下载",
+      "CPU 基线推理",
+      "NPU 推理",
+      "CPU/NPU 精度对比验证",
+      "验收确认"
+    ],
+    "expected_tools": [
+      "npu-smi",
+      "pip install torch_npu",
+      "pip install transformers soundfile pyctcdecode",
+      "snapshot_download",
+      "python3 scripts/accuracy_run.py"
+    ],
+    "expected_artifacts": [
+      "accuracy_results.json",
+      "model_files/wav2vec2-urdu/"
+    ],
+    "tags": ["wav2vec2", "urdu", "asr", "npu", "ascend", "inference", "precision-verification"]
+  },
+  {
+    "prompt": "对 wav2vec2-large-xls-r-300m-Urdu 模型在昇腾 NPU 上进行性能基准测试。测试不同音频长度（3s、5s、10s、30s）在 NPU 上的推理延迟和 RTF。使用 accuracy_run_perf.py 脚本，确保 warmup 3 次后正式测试 10 次取平均。保存性能结果到 perf_results.json 并输出汇总表格。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "NPU 推理",
+      "性能基准测试",
+      "验收确认"
+    ],
+    "expected_tools": [
+      "python3 scripts/accuracy_run_perf.py",
+      "torch.npu.synchronize()",
+      "npu-smi"
+    ],
+    "expected_artifacts": [
+      "perf_results.json",
+      "scripts/accuracy_check/"
+    ],
+    "tags": ["wav2vec2", "urdu", "asr", "benchmark", "npu", "performance"]
+  },
+  {
+    "prompt": "NPU 不可用时回退到 CPU 推理。在执行 wav2vec2-large-xls-r-300m-Urdu 部署时检测到 NPU 不可用（torch.npu.is_available() 为 False），自动切换到 CPU 执行推理，输出标记 NPU_FALLBACK=true。精度对比基于纯 CPU 结果。运行 check_accuracy_run_perf.py 生成验收报告。",
+    "expected_steps": [
+      "环境初始化与 NPU 检测",
+      "安装依赖与模型下载",
+      "CPU 基线推理"
+    ],
+    "expected_tools": [
+      "torch.npu.is_available()",
+      "python3 inference.py --test"
+    ],
+    "expected_fallback_behavior": "NPU 不可用时自动回退到 CPU 推理，输出标记 NPU_FALLBACK=true",
+    "tags": ["wav2vec2", "urdu", "fallback", "cpu", "edge-case"]
+  }
+]

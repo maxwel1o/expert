@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "prompt": "部署 AIMv2-large-patch14-224 到 NPU 并执行权重转换和推理验证",
+        "expected": "完成权重转换（safetensors → PyTorch state_dict）、FP16 推理，输出特征向量和性能报告，feature_norm > 0 且无 NaN"
+    },
+    {
+        "id": 2,
+        "prompt": "对 AIMv2-3B-patch14-224 执行 FP16 与 FP32 精度对比",
+        "expected": "分别在 FP16 NPU 和 FP32 CPU 执行推理，计算余弦相似度 > 0.999，范数差异 < 0.1%"
+    },
+    {
+        "id": 3,
+        "prompt": "串行处理 AIMv2-large、huge、1B 三个尺度在 224 分辨率下的部署",
+        "expected": "三个模型依次串行执行权重转换、推理、性能测试和精度对比，每完成一个释放 NPU 显存"
+    },
+    {
+        "id": 4,
+        "prompt": "NPU 不可用时处理 AIMv2-huge-patch14-336 推理的 fallback",
+        "expected": "检测 NPU 不可用后输出错误提示，指导用户检查 CANN 环境和 torch_npu 安装"
+    },
+    {
+        "id": 5,
+        "prompt": "AIMv2-1B-patch14-448 推理 OOM 时进行重试",
+        "expected": "检测 OOM 后执行 torch.npu.empty_cache() 和 gc.collect()，重试失败后提示降低分辨率或换用小尺度模型"
+    },
+    {
+        "id": 6,
+        "prompt": "对 AIMv2-3B 在 224、336、448 三种分辨率下进行性能基准测试",
+        "expected": "三种分辨率下依次执行推理基准测试，记录延迟和吞吐量，对比性能参考表是否在 ±20% 范围内"
+    },
+    {
+        "id": 7,
+        "prompt": "转换 AIMv2-3B-224 权重后复用于 3B-336 推理",
+        "expected": "复用 3B-224 转换后的 converted_model.pth，修改 config.json 中 image_size 为 336，完成 3B-336 推理验证"
+    }
+]

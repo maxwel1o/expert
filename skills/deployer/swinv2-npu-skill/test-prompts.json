@@ -1,0 +1,58 @@
+[
+  {
+    "prompt": "Deploy swinv2_tiny_window8_256.ms_in1k on Ascend 910 NPU and run inference",
+    "expected_steps": [
+      "source CANN environment",
+      "install torch_npu dependencies",
+      "verify NPU availability",
+      "download model weights from ModelScope",
+      "run CPU inference",
+      "run NPU inference",
+      "compare CPU/NPU results"
+    ]
+  },
+  {
+    "prompt": "Compare CPU and NPU inference accuracy for swinv2_small_window16_256.ms_in1k",
+    "expected_steps": [
+      "load inference_results.json",
+      "extract CPU logits",
+      "extract NPU logits",
+      "compute cosine similarity",
+      "compute max absolute error",
+      "compute top-5 agreement",
+      "check pass criteria > 0.999"
+    ]
+  },
+  {
+    "prompt": "Generate README and terminal screenshot for swinv2_base_window12_192.ms_in22k",
+    "expected_steps": [
+      "run inference to generate results",
+      "run precision comparison",
+      "execute generate_readmes.py",
+      "execute generate_screenshots.py",
+      "verify readme.md and png exist"
+    ]
+  },
+  {
+    "prompt": "Publish all 15 SwinV2 models to GitCode model repositories",
+    "expected_steps": [
+      "run batch_runner.py for all models",
+      "generate READMEs for all models",
+      "generate screenshots for all models",
+      "set ATOMGIT_USER_TOKEN",
+      "run gitcode_push.py",
+      "verify repos on GitCode"
+    ]
+  },
+  {
+    "prompt": "Handle NPU OOM error during SwinV2 batch processing",
+    "expected_steps": [
+      "detect OOM RuntimeError",
+      "call torch.npu.empty_cache()",
+      "call gc.collect()",
+      "retry serial processing",
+      "skip already completed models",
+      "check memory with npu-smi"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "name": "swin-batch-npu",
+  "display_name": "Swin Transformer Batch NPU Deployment Skill",
+  "description": "一站式完成 Swin Transformer 系列模型（19个变体）在昇腾 NPU 上的部署、推理、CPU/NPU 精度测试、README生成、终端截图生成和 GitCode 模型仓库发布。自动串行执行多个模型，避免NPU显存爆炸。",
+  "type": "deployment",
+  "version": "1.0.0",
+  "icon": "npu",
+  "tags": [
+    "swin-transformer",
+    "timm",
+    "image-classification",
+    "ascend",
+    "npu",
+    "batch-deployment"
+  ],
+  "params": {
+    "model_name": {
+      "type": "string",
+      "description": "指定单个模型名称（可选），不指定则执行全部19个模型",
+      "required": false,
+      "default": "all"
+    },
+    "skip_inference": {
+      "type": "boolean",
+      "description": "跳过推理步骤，只生成文档和提交仓库",
+      "required": false,
+      "default": false
+    },
+    "skip_push": {
+      "type": "boolean",
+      "description": "跳过 GitCode 仓库推送",
+      "required": false,
+      "default": false
+    }
+  }
+}

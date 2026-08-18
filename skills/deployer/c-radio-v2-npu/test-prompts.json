@@ -1,0 +1,32 @@
+[
+    {
+        "id": "c-radio-v2-env-check",
+        "name": "NPU 环境预检验证",
+        "prompt": "检查昇腾 NPU 环境是否就绪，加载 CANN 环境并验证设备状态",
+        "expected": "npu-smi info 显示设备正常，torch_npu 导入无报错"
+    },
+    {
+        "id": "c-radio-v2-download",
+        "name": "模型权重下载验证",
+        "prompt": "使用 hf-mirror.com 镜像下载 C-RADIOv2-B 模型权重和配置文件",
+        "expected": "snapshot_download 下载配置和权重文件到本地目录"
+    },
+    {
+        "id": "c-radio-v2-inference",
+        "name": "NPU 推理验证",
+        "prompt": "在昇腾 NPU 上加载 C-RADIOv2-B 模型进行推理，验证输出形状",
+        "expected": "Summary 维度 (1, 2304)，Spatial 维度 (1, 729, 768)"
+    },
+    {
+        "id": "c-radio-v2-accuracy",
+        "name": "精度对比验证",
+        "prompt": "运行精度测试脚本对比 NPU 和 CPU 输出差异",
+        "expected": "Cosine Similarity > 0.99，MSE < 1e-4"
+    },
+    {
+        "id": "c-radio-v2-error",
+        "name": "异常处理验证",
+        "prompt": "模拟 torch_npu 未安装场景，测试 fallback 策略是否生效",
+        "expected": "提示加载 CANN 环境并重装 torch_npu"
+    }
+]

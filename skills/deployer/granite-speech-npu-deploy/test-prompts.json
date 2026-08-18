@@ -1,0 +1,84 @@
+[
+  {
+    "prompt": "Granite Speech 4.1 语音模型在昇腾 NPU 上部署，需要环境准备、模型加载和推理验证。",
+    "expected_tools": ["Bash", "Python3"],
+    "expected_steps": [
+      "环境准备：source set_env.sh, npu-smi info, 设置环境变量",
+      "下载权重：使用 ModelScope 下载 granite-speech 权重",
+      "安装依赖：pip install torch torch_npu transformers==4.57.6",
+      "NPU 验证：import torch_npu, 确认 is_available()",
+      "Smoke test：python3 scripts/test_npu.py --mode smoke",
+      "推理验证：python3 scripts/inference.py --audio-path sample.wav",
+      "基准测试：python3 scripts/benchmark.py",
+      "精度对比：python3 scripts/test_accuracy.py"
+    ],
+    "checkpoints": [
+      "CP-1 环境检查点：确认 NPU 设备健康",
+      "CP-2 下载检查点：确认权重路径和来源",
+      "CP-3 烟雾测试检查点：确认模型加载成功",
+      "CP-4 推理验证检查点：确认转录输出合理",
+      "CP-5 精度验证检查点：余弦相似度 > 0.999"
+    ],
+    "category": "model-deploy"
+  },
+  {
+    "prompt": "Granite Speech base 版本（granite-speech-4.1-2b）在 Ascend 910B4 上进行 smoke test 和 benchmark。",
+    "expected_tools": ["Bash", "Python3"],
+    "expected_steps": [
+      "加载 CANN 环境，设置 NPU 显存参数",
+      "安装 transformers==4.57.6",
+      "使用 GraniteSpeechForConditionalGeneration 加载 base 模型到 NPU",
+      "python3 scripts/test_npu.py --model-path ./granite-speech-4.1-2b --mode smoke",
+      "python3 scripts/benchmark.py 测试 base 变体性能"
+    ],
+    "checkpoints": [
+      "CP-1 环境检查点",
+      "CP-2 烟雾测试检查点"
+    ],
+    "category": "model-deploy"
+  },
+  {
+    "prompt": "Granite Speech plus 版本（granite-speech-4.1-2b-plus）验证 cat_hidden_layers 功能和精度对比。",
+    "expected_tools": ["Bash", "Python3"],
+    "expected_steps": [
+      "将 granite_speech_plus 适配包添加到 sys.path",
+      "调用 register() 注册 plus 模型类型",
+      "使用 GraniteSpeechPlusForConditionalGeneration 加载 plus 模型",
+      "在 CPU float32 和 NPU bfloat16 上分别 forward",
+      "计算余弦相似度和误差指标"
+    ],
+    "checkpoints": [
+      "CP-1 环境检查点",
+      "CP-2 精度验证检查点"
+    ],
+    "category": "model-deploy"
+  },
+  {
+    "prompt": "Granite Speech 精度验证，对比 CPU float32 和 NPU bfloat16 推理结果的一致性。",
+    "expected_tools": ["Python3"],
+    "expected_steps": [
+      "python3 scripts/test_accuracy.py --model-path ./granite-speech-4.1-2b",
+      "python3 scripts/test_accuracy.py --model-path ./granite-speech-4.1-2b-plus",
+      "确认余弦相似度 > 0.999",
+      "确认相对误差 < 1%"
+    ],
+    "checkpoints": [
+      "CP-1 精度验证检查点"
+    ],
+    "category": "model-deploy"
+  },
+  {
+    "prompt": "Granite Speech 模型部署常见错误排查：权重文件错误、OOM 和 plus 注册失败。",
+    "expected_tools": ["Bash", "Python3"],
+    "expected_steps": [
+      "检查 SafetensorError: header too large，使用 ModelScope 下载权重",
+      "设置 PYTORCH_NPU_ALLOC_CONF=expandable_segments:True 解决 OOM",
+      "先调用 register() 再导入 GraniteSpeechPlusForConditionalGeneration",
+      "使用 model.npu() 而非 model.to('npu:7') 指定设备"
+    ],
+    "checkpoints": [
+      "CP-1 环境检查点"
+    ],
+    "category": "model-deploy"
+  }
+]

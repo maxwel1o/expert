@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "在昇腾 NPU 上部署 Qwen3-ASR-0.6B 模型并运行中文语音识别",
+    "expected": "按照 SKILL.md 的8步流程完成环境初始化、依赖安装、模型注册、ASR推理，输出中文转录文本。"
+  },
+  {
+    "id": 2,
+    "prompt": "在 Atlas 800 A2 上使用 Qwen3-ForcedAligner 对齐一段中文音频的时间戳",
+    "expected": "完成模型加载注册后调用 Qwen3ForcedAligner，输出字级时间戳且在音频时长范围内。"
+  },
+  {
+    "id": 3,
+    "prompt": "运行 Qwen3-ASR 的 Benchmark 并验证 CER/WER 精度",
+    "expected": "执行 benchmark.py，输出中文/英文的 CER、WER，延迟 P50/P95 和吞吐量，保存结果到 benchmark_results.json。"
+  }
+]

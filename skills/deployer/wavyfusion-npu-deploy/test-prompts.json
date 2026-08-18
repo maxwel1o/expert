@@ -1,0 +1,26 @@
+[
+  {
+    "prompt": "部署 WavyFusion 模型到昇腾 NPU 并验证推理结果"
+  },
+  {
+    "prompt": "在 Ascend910 上使用 WavyFusion 进行文生图推理，测试 fp16 精度"
+  },
+  {
+    "prompt": "对 WavyFusion 模型进行性能基准测试，采集吞吐量和延迟数据"
+  },
+  {
+    "prompt": "对比 WavyFusion 在 NPU 上 fp16 和 fp32 的推理精度差异"
+  },
+  {
+    "prompt": "在多张 NPU 卡上运行 WavyFusion 推理并验证输出一致性"
+  },
+  {
+    "prompt": "使用 npu-smi 检查 NPU 状态后部署 WavyFusion SD1.5 模型"
+  },
+  {
+    "prompt": "通过 HuggingFace 镜像下载 WavyFusion 权重并在昇腾 NPU 上推理"
+  },
+  {
+    "prompt": "验证 WavyFusion 模型在 Ascend NPU 上的推理结果与预期一致"
+  }
+]

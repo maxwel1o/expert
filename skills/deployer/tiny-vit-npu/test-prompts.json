@@ -1,0 +1,17 @@
+[
+  "在 Ascend910 NPU 上部署 TinyViT 5M 模型并完成推理",
+  "对比 tiny_vit_5m_224.in1k 在 CPU 与 NPU 上的精度一致性",
+  "批量运行所有 11 个 TinyViT 模型变体的 CPU/NPU 精度对比",
+  "验证 tiny_vit_21m_512 模型在输入尺寸 512x512 下的 NPU 推理性能",
+  "在 NPU 显存不足时自动回退并使用 CPU 进行推理",
+  "检查模型权重下载失败时的重试机制与错误恢复",
+  "使用 modelscope 下载 TinyViT 预训练权重并加载到 NPU",
+  "生成 TinyViT 模型精度对比的 evals.json 与 results.tsv 报告",
+  "通过 GitCode API 发布通过精度验证的模型仓库",
+  "测试 tiny_vit_11m_224 系列在 NPU 上的推理速度与精度指标",
+  "验证串行执行策略是否能避免 NPU 显存爆炸",
+  "在推理输出出现 NaN 或 Inf 时跳过当前模型并记录错误日志",
+  "检查精度对比中 Prob Relative Error 超过 1% 时的异常处理流程",
+  "使用 npu-smi info 确认 NPU 设备状态后再执行推理",
+  "验证 CPU 与 NPU 推理结果的余弦相似度是否大于 0.999"
+]

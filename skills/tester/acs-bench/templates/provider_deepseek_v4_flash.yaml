@@ -1,0 +1,13 @@
+# ============================================================
+# Provider 配置 — DeepSeek V4 Flash 官方API
+# ============================================================
+# ⚠️ 此文件包含敏感信息，不要提交到版本控制
+# ⚠️ Tokenizer: $PROF_ROOT/models/DeepSeek-V4-Flash
+# ⚠️ base_url: DeepSeek官方API
+
+providers:
+  - id: 'mt_test'
+    name: 'deepseek-v4-flash'
+    api_key: '<YOUR_API_KEY>'
+    base_url: 'https://api.deepseek.com/v1'
+    model_name: 'deepseek-v4-flash'

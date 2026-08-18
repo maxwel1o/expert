@@ -1,0 +1,14 @@
+{
+  "test_prompts": [
+    "Deploy phikon-v2 on Ascend NPU",
+    "Run phikon-v2 inference on NPU and compare with CPU",
+    "Benchmark phikon-v2 batch performance on Ascend910",
+    "Validate phikon-v2 precision between CPU fp32 and NPU fp16",
+    "Download phikon-v2 model weights and verify file integrity",
+    "Run phikon-v2 single image inference on NPU",
+    "Publish phikon-v2 NPU model to GitCode repository",
+    "Check NPU environment and install dependencies for phikon-v2",
+    "Test phikon-v2 with different batch sizes on Ascend NPU",
+    "Generate accuracy report for phikon-v2 NPU deployment"
+  ]
+}

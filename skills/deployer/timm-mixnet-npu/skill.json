@@ -1,0 +1,42 @@
+{
+  "name": "timm-mixnet-npu",
+  "version": "1.0.0",
+  "description": "timm MixNet (tf_mixnet_s/m/l.in1k) 系列模型在昇腾 NPU 上的适配、推理、精度验证和模型仓库发布 Skill",
+  "type": "deployment",
+  "author": "model-agent",
+  "license": "Apache-2.0",
+  "tags": ["NPU", "Ascend", "timm", "MixNet", "图像分类", "CV"],
+  "models": [
+    "tf_mixnet_s.in1k",
+    "tf_mixnet_m.in1k",
+    "tf_mixnet_l.in1k"
+  ],
+  "inputs": {
+    "model_name": {
+      "type": "string",
+      "description": "模型名称，可选值: tf_mixnet_s.in1k, tf_mixnet_m.in1k, tf_mixnet_l.in1k",
+      "required": true
+    },
+    "checkpoint_dir": {
+      "type": "string",
+      "description": "模型权重文件所在目录路径",
+      "required": true
+    },
+    "device": {
+      "type": "string",
+      "description": "推理设备: cpu 或 npu",
+      "default": "npu",
+      "required": false
+    }
+  },
+  "outputs": {
+    "logits": "logits_{device}.pt - 模型输出的全量 logits",
+    "results": "output_{device}.json - Top-5 预测结果",
+    "comparison": "comparison_results.json - CPU/NPU 精度对比结果"
+  },
+  "model_repos": {
+    "tf_mixnet_s.in1k": "https://gitcode.com/m0_74196153/tf_mixnet_s.in1k-npu",
+    "tf_mixnet_m.in1k": "https://gitcode.com/m0_74196153/tf_mixnet_m.in1k-npu",
+    "tf_mixnet_l.in1k": "https://gitcode.com/m0_74196153/tf_mixnet_l.in1k-npu"
+  }
+}

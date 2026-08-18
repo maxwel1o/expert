@@ -1,0 +1,32 @@
+[
+    {
+        "id": "c-radio-v4-env",
+        "name": "NPU 环境预检验证",
+        "prompt": "检查昇腾 NPU 环境是否就绪，加载 CANN 环境并验证状态",
+        "expected": "npu-smi info 显示设备正常，torch_npu 导入无报错"
+    },
+    {
+        "id": "c-radio-v4-download",
+        "name": "模型下载验证",
+        "prompt": "使用 hf-mirror.com 镜像下载 C-RADIOv4-H 模型权重和配置文件",
+        "expected": "下载 config.json、model.safetensors 到本地目录"
+    },
+    {
+        "id": "c-radio-v4-adapt",
+        "name": "适配修改验证",
+        "prompt": "处理 utils.py 与标准库命名冲突问题",
+        "expected": "重命名 utils.py 为 radio_utils.py 并更新所有 import 引用"
+    },
+    {
+        "id": "c-radio-v4-inference",
+        "name": "NPU 推理验证",
+        "prompt": "在昇腾 NPU 上加载 C-RADIOv4-H 模型推理，验证输出形状",
+        "expected": "Summary 维度 (1, 2560)，Spatial 维度 (1, 1024, 1280)"
+    },
+    {
+        "id": "c-radio-v4-accuracy",
+        "name": "精度对比验证",
+        "prompt": "运行精度测试脚本对比 NPU 和 CPU 输出差异",
+        "expected": "Cosine Similarity = 1.0，Mean Relative Error = 0.0"
+    }
+]

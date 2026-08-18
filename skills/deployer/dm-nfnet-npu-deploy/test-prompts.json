@@ -1,0 +1,44 @@
+[
+  {
+    "prompt": "在昇腾 NPU 上部署 dm_nfnet_f0 模型并进行 CPU/NPU 精度对比",
+    "expected_skill": "dm-nfnet-npu-deploy",
+    "expected_outputs": [
+      "npu-smi info 确认 NPU 芯片状态 OK",
+      "冒烟测试: python3 scripts/compare_cpu_npu.py --model dm_nfnet_f0.dm_in1k --image test.jpg",
+      "余弦相似度 > 0.999，Top-1 分类一致，Top-100 相对误差 < 1%"
+    ],
+    "estimated_time": "5 minutes"
+  },
+  {
+    "prompt": "批量验证全部 7 个 dm_nfnet 模型的 CPU/NPU 推理精度并推送到 GitCode",
+    "expected_skill": "dm-nfnet-npu-deploy",
+    "expected_outputs": [
+      "CK-01: 确认磁盘 >= 20GB、NPU 空闲",
+      "冒烟测试 CK-04 通过后执行 bash examples/run_all_models.sh",
+      "每个模型串行执行，调用 torch.npu.empty_cache() 释放显存",
+      "CK-03: 全部精度验证通过后推送到 GitCode 模型仓库"
+    ],
+    "estimated_time": "30-60 minutes"
+  },
+  {
+    "prompt": "dm_nfnet_f6 NPU 推理报 OOM，怎么排查和降级",
+    "expected_skill": "dm-nfnet-npu-deploy",
+    "expected_outputs": [
+      "npu-smi info 查看 Memory-Usage 确认是否有其他进程占用",
+      "确保每个模型后调用 torch.npu.empty_cache()",
+      "单独跑 f6 而非批量",
+      "仍不行则 CPU 降级: --device cpu"
+    ],
+    "estimated_time": "10 minutes"
+  },
+  {
+    "prompt": "dm_nfnet_f0 NPU 和 CPU Top-1 分类结果不一致但 logits 余弦相似度 > 0.999，怎么判断",
+    "expected_skill": "dm-nfnet-npu-deploy",
+    "expected_outputs": [
+      "可能是 timm 版本间 ImageNet 标签映射差异",
+      "以 logits 余弦相似度为准（> 0.999 通过），不只看 Top-1",
+      "检查 timm 版本: pip show timm"
+    ],
+    "estimated_time": "5 minutes"
+  }
+]

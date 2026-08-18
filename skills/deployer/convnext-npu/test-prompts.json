@@ -1,0 +1,38 @@
+[
+  {
+    "prompt": "在昇腾 NPU 上部署 ConvNeXt Nano 模型并验证推理精度",
+    "expected_skill": "convnext-npu",
+    "expected_actions": [
+      "环境初始化与 npu-smi info 检查",
+      "安装 torch-npu timm 等依赖",
+      "从 ModelScope 下载 convnext_nano.in12k_ft_in1k 权重",
+      "执行 CPU 推理获得基线结果",
+      "执行 NPU 推理",
+      "运行 compare_cpu_npu.py 精度对比",
+      "确认余弦相似度 > 0.999"
+    ],
+    "success_criteria": "NPU 推理与 CPU 推理 Top-1 分类结果一致，余弦相似度 > 0.999"
+  },
+  {
+    "prompt": "帮我批量验证所有 24 个 ConvNeXt 模型的 NPU 精度",
+    "expected_skill": "convnext-npu",
+    "expected_actions": [
+      "执行 scripts/run_all_models.sh 串行处理所有模型",
+      "每个模型完成后释放 NPU 显存",
+      "生成所有模型的 comparison_results.json",
+      "生成各模型的 README.md"
+    ],
+    "success_criteria": "全部 24 个模型 CPU/NPU 推理误差 < 1%，无 OOM 错误"
+  },
+  {
+    "prompt": "NPU 推理报 OutOfMemoryError 怎么办",
+    "expected_skill": "convnext-npu",
+    "expected_actions": [
+      "查看异常处理与回滚策略章节",
+      "执行 torch.npu.empty_cache() 释放显存",
+      "确认无其他进程占用 NPU",
+      "串行执行而非并行执行多个模型"
+    ],
+    "success_criteria": "OOM 错误解决，后续推理正常完成"
+  }
+]

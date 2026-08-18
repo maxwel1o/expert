@@ -1,0 +1,14 @@
+[
+  {
+    "name": "full_npu_deployment_validation",
+    "prompt": "使用 wav2vec2-indonesian-javanese-sundanese-npu 在 Ascend NPU 上完整部署 wav2vec2-indonesian-javanese-sundanese 语音识别模型，包括环境初始化、依赖安装、NPU 验证、模型下载、推理验证、CPU/NPU 精度对比和性能基准测试，要求输出 eval/results.json、eval/benchmark.log 和精度对比结论。"
+  },
+  {
+    "name": "precision_accuracy_checkpoint",
+    "prompt": "执行 wav2vec2-indonesian-javanese-sundanese 模型的 CPU/NPU 精度对比，验证余弦相似度 > 0.9999，检查 benchmark.py 的精度检查点 CP-5 和验收确认 CP-7 是否触发用户确认。"
+  },
+  {
+    "name": "error_recovery_edge_cases",
+    "prompt": "模拟 wav2vec2 部署中的异常场景：CANN 环境未加载导致 torch_npu 导入失败、模型下载网络超时、kenlm 编译失败回退到贪心解码、长音频 OOM 触发分块推理、多卡抢占冲突自动选择空闲卡。验证每个场景的 fallback/retry/recover 机制。"
+  }
+]

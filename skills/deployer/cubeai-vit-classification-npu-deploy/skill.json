@@ -1,0 +1,41 @@
+{
+  "name": "cubeai-vit-classification-npu-deploy",
+  "description": "CubeAI 智立方 ViT 图像分类模型系列在昇腾 NPU 上的完整部署、推理、CPU/NPU 精度对比、终端截图生成、README 编写与 GitCode 模型仓库发布 Skill。支持 11 个 ViT 图像分类模型的串行适配和验证（CPU/NPU 误差 < 1%）。",
+  "metadata": {
+    "short-description": "CubeAI ViT 图像分类模型昇腾 NPU 部署",
+    "category": "NPU-Model-Deploy",
+    "tags": [
+      "ascend", "npu", "vit", "image-classification",
+      "pytorch", "transformers",
+      "inference", "precision-validation",
+      "#+NPU", "#+CV", "#+图像分类", "#+昇腾", "#+ViT"
+    ],
+    "supported-models": [
+      "cv_level1_protected_animals_classification",
+      "67_cat_breeds_image_detection",
+      "brain_model",
+      "133_dog_breeds_image_detection",
+      "bird_species_image_detection",
+      "bug_classifier",
+      "cv_edible_wild_plants_classification",
+      "cv_forest_pest_detection",
+      "100_butterfly_types_image_detection",
+      "215_mushroom_types_image_detection",
+      "birds_transform_full"
+    ],
+    "failed-models": [],
+    "model-repos": {
+      "cv_level1_protected_animals_classification": "https://gitcode.com/gcw_C8PI9e90/cv_level1_protected_animals_classification-npu",
+      "67_cat_breeds_image_detection": "https://gitcode.com/gcw_C8PI9e90/67_cat_breeds_image_detection-npu",
+      "brain_model": "https://gitcode.com/gcw_C8PI9e90/brain_model-npu",
+      "133_dog_breeds_image_detection": "https://gitcode.com/gcw_C8PI9e90/133_dog_breeds_image_detection-npu",
+      "bird_species_image_detection": "https://gitcode.com/gcw_C8PI9e90/bird_species_image_detection-npu",
+      "bug_classifier": "https://gitcode.com/gcw_C8PI9e90/bug_classifier-npu",
+      "cv_edible_wild_plants_classification": "https://gitcode.com/gcw_C8PI9e90/cv_edible_wild_plants_classification-npu",
+      "cv_forest_pest_detection": "https://gitcode.com/gcw_C8PI9e90/cv_forest_pest_detection-npu",
+      "100_butterfly_types_image_detection": "https://gitcode.com/gcw_C8PI9e90/100_butterfly_types_image_detection-npu",
+      "215_mushroom_types_image_detection": "https://gitcode.com/gcw_C8PI9e90/215_mushroom_types_image_detection-npu",
+      "birds_transform_full": "https://gitcode.com/gcw_C8PI9e90/birds_transform_full-npu"
+    }
+  }
+}

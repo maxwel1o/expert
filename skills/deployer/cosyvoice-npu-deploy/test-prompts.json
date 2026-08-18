@@ -1,0 +1,17 @@
+[
+  {
+    "id": "cosyvoice-single-model-smoke-test",
+    "prompt": "帮我在 Ascend910 上验证 CosyVoice-300M 的 CPU 和 NPU 推理是否都能跑通。",
+    "expected": "先检查 npu-smi、CANN、torch_npu 和 CosyVoice 依赖，再执行 CPU/NPU smoke test，并输出结果文件路径。"
+  },
+  {
+    "id": "cosyvoice-four-model-benchmark",
+    "prompt": "我想串行评测 CosyVoice 四个模型的 NPU 性能，生成加速比和 RTF 汇总。",
+    "expected": "要求模型串行执行、每个模型释放显存，输出 CPU/NPU JSON、comparison JSON 和 benchmark 表格。"
+  },
+  {
+    "id": "cosyvoice-istft-fallback",
+    "prompt": "CosyVoice 在 NPU 上遇到 torch.istft 相关报错，怎么判断是不是适配失败？",
+    "expected": "解释 istft CPU fallback 策略，区分预期回退和真实失败，并给出 retry、日志和报告标注方式。"
+  }
+]

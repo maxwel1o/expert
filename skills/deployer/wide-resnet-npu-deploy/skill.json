@@ -1,0 +1,19 @@
+{
+  "name": "wide-resnet-npu-deploy",
+  "version": "1.0.0",
+  "description": "Wide ResNet 系列模型在昇腾 NPU 上的完整部署与推理验证 Skill",
+  "category": "NPU-Model-Deploy",
+  "tags": ["ascend", "npu", "wide-resnet", "timm", "image-classification", "pytorch", "cv", "resnet"],
+  "models": [
+    "wide_resnet50_2.racm_in1k",
+    "wide_resnet50_2.tv2_in1k",
+    "wide_resnet50_2.tv_in1k",
+    "wide_resnet101_2.tv_in1k",
+    "wide_resnet101_2.tv2_in1k"
+  ],
+  "dependencies": ["torch", "torch_npu", "timm", "Pillow", "numpy", "safetensors", "modelscope"],
+  "hardware": "Ascend910",
+  "framework": "PyTorch",
+  "task_type": "image-classification",
+  "repository": "https://gitcode.com/m0_74196153/wide_resnet50_2.racm_in1k-npu"
+}

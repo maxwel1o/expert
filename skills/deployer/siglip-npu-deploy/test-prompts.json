@@ -1,0 +1,37 @@
+[
+  {
+    "prompt": "在昇腾 NPU 上部署 SigLIP ViT-B-16-SigLIP 模型并验证精度",
+    "expected_skill": "siglip-npu-deploy",
+    "expected_actions": [
+      "环境初始化与 npu-smi info 检查",
+      "安装 torch_npu open_clip_torch safetensors",
+      "从 ModelScope 下载 ViT-B-16-SigLIP 权重",
+      "执行 NPU 推理获得图像特征",
+      "对比 CPU/NPU 输出余弦相似度",
+      "确认嵌入维度为 768"
+    ],
+    "success_criteria": "NPU 推理成功，输出维度 768，余弦相似度 > 0.999，最大相对误差 < 1%"
+  },
+  {
+    "prompt": "帮我批量部署并验证全部 15 个 SigLIP/SigLIP2 模型",
+    "expected_skill": "siglip-npu-deploy",
+    "expected_actions": [
+      "执行 scripts/run_all_models.sh 串行处理",
+      "每个模型下载→CPU推理→NPU推理→精度对比",
+      "每个模型后释放 NPU 显存",
+      "生成所有模型的 results.json 和 summary.json",
+      "生成各模型 README.md"
+    ],
+    "success_criteria": "全部 15 个模型最大相对误差 < 1%，余弦相似度 > 0.999，无 OOM 错误"
+  },
+  {
+    "prompt": "SigLIP NPU 推理报错 ImportError: No module named torch_npu",
+    "expected_skill": "siglip-npu-deploy",
+    "expected_actions": [
+      "查看异常处理与回滚策略章节",
+      "source /usr/local/Ascend/ascend-toolkit/set_env.sh",
+      "重装 torch-npu 与 CANN 版本匹配"
+    ],
+    "success_criteria": "import torch_npu 成功，torch_npu.npu.is_available() 返回 True"
+  }
+]

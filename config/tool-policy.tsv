@@ -1,0 +1,6 @@
+profile	keep	disable	reason
+default	web,terminal,file,skills,todo,memory,session_search,clarify	browser,code_execution,vision,image_gen,tts,delegation,cronjob,computer_use	Leader 保留规划、记忆、澄清和 github-raw-fetch 所需 curl；禁用直接开发、媒体、定时和绕过 Kanban 的委派能力
+deployer	web,browser,terminal,file,code_execution,vision,skills	image_gen,tts,todo,memory,session_search,clarify,delegation,cronjob,computer_use	保留技术执行与部署检查能力；任务生命周期由 Kanban 注入，不允许自行委派或长期记忆
+tester	web,browser,terminal,file,code_execution,vision,skills	image_gen,tts,todo,memory,session_search,clarify,delegation,cronjob,computer_use	保留接口、命令、代码和结果检查能力；不允许自行委派或创建后台计划
+profiler	web,browser,terminal,file,code_execution,vision,skills	image_gen,tts,todo,memory,session_search,clarify,delegation,cronjob,computer_use	保留采集工具、文件和可视结果检查能力；不允许自行委派或创建后台计划
+analyst	web,browser,terminal,file,code_execution,vision,skills	image_gen,tts,todo,memory,session_search,clarify,delegation,cronjob,computer_use	保留数据处理、文档检索和图像结果读取能力；不允许自行委派或创建后台计划

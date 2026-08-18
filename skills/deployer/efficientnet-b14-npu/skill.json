@@ -1,0 +1,50 @@
+{
+  "name": "efficientnet-b14-npu",
+  "display_name": "EfficientNet Batch 14 NPU Deployment Skill",
+  "description": "一站式完成 EfficientNet 系列 68 个模型在昇腾 NPU 上的部署、推理、CPU/NPU 精度测试、README生成、终端截图生成和 GitCode 模型仓库发布。自动串行执行多个模型，避免 NPU 显存爆炸。包含 EfficientNetV2、EfficientNet Lite、EfficientNet B0-B8、CondConv、NoisyStudent、Test EfficientNet 等变体。",
+  "type": "deployment",
+  "version": "1.0.0",
+  "icon": "npu",
+  "tags": [
+    "efficientnet",
+    "timm",
+    "image-classification",
+    "ascend",
+    "npu",
+    "batch-deployment",
+    "efficientnetv2",
+    "efficientnet-lite"
+  ],
+  "params": {
+    "model_name": {
+      "type": "string",
+      "description": "指定单个模型名称（可选），不指定则执行全部 68 个模型",
+      "required": false,
+      "default": "all"
+    },
+    "start_index": {
+      "type": "integer",
+      "description": "起始索引（从0开始），用于分批处理",
+      "required": false,
+      "default": 0
+    },
+    "end_index": {
+      "type": "integer",
+      "description": "结束索引（不包含），用于分批处理",
+      "required": false,
+      "default": 68
+    },
+    "skip_inference": {
+      "type": "boolean",
+      "description": "跳过推理步骤，只生成文档和提交仓库",
+      "required": false,
+      "default": false
+    },
+    "skip_push": {
+      "type": "boolean",
+      "description": "跳过 GitCode 仓库推送",
+      "required": false,
+      "default": false
+    }
+  }
+}

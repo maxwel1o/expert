@@ -1,0 +1,56 @@
+[
+  {
+    "prompt": "Deploy Swin Transformer model swin_tiny_patch4_window7_224.ms_in1k on Ascend910 NPU, perform CPU/NPU inference comparison, generate README and push to GitCode model repository.",
+    "expected_skills": [
+      "swin-batch-npu"
+    ],
+    "expected_outputs": [
+      "inference.py",
+      "compare_cpu_npu.py",
+      "README.md",
+      "screenshot.png"
+    ],
+    "difficulty": "basic",
+    "tags": [
+      "single-model",
+      "cpu-npu-comparison",
+      "gitcode-push"
+    ]
+  },
+  {
+    "prompt": "Run batch inference for all 19 Swin Transformer variants on Ascend NPU, serial execution with memory cleanup between models, produce accuracy comparison results against CPU baselines.",
+    "expected_skills": [
+      "swin-batch-npu"
+    ],
+    "expected_outputs": [
+      "batch_runner.py",
+      "results.tsv",
+      "evals.json"
+    ],
+    "difficulty": "intermediate",
+    "tags": [
+      "batch-deployment",
+      "serial-execution",
+      "memory-management",
+      "precision-baseline"
+    ]
+  },
+  {
+    "prompt": "Handle failed NPU inference for swin_large_patch4_window12_384.ms_in22k on Ascend910: model weight download timeout, then OOM during NPU inference, recover and retry with memory cleanup before declaring failure.",
+    "expected_skills": [
+      "swin-batch-npu"
+    ],
+    "expected_outputs": [
+      "evals.json",
+      "inference.py",
+      "results.tsv"
+    ],
+    "difficulty": "advanced",
+    "tags": [
+      "error-recovery",
+      "fallback",
+      "memory-cleanup",
+      "retry-logic"
+    ]
+  }
+]
