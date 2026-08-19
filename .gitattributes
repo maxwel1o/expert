@@ -7,3 +7,4 @@ team_progress/assets/hermes-kanban-progress-hook text eol=lf
 # Preserve vendored upstream content byte-for-byte; checksums are published.
 skills/** -text
 third_party_licenses/** -text
+vendor/hermes-agent/** -text

@@ -6,7 +6,10 @@ WITH_PROGRESS=0
 case "${1:-}" in
   "") ;;
   --with-progress) WITH_PROGRESS=1 ;;
-  *) echo "usage: $0 [--with-progress]" >&2; exit 2 ;;
+  --install-hermes)
+    exec "$SCRIPT_DIR/scripts/install-hermes.sh" --apply
+    ;;
+  *) echo "usage: $0 [--install-hermes|--with-progress]" >&2; exit 2 ;;
 esac
 
 "$SCRIPT_DIR/scripts/setup-team.sh" --apply

@@ -16,17 +16,24 @@
 需要：
 
 - Linux 或 Linux 容器；
-- 已安装且能正常启动的 Hermes Agent；
+- 能访问 Python/Node 依赖源；仓库已经包含 Hermes Agent 0.17.0 源码，无需预装 Hermes；
 - `bash`、`python3`、SQLite（Python 标准库即可）和常用 coreutils；
 - 安装进度 Hook 时需要 PyYAML；
 - 有权写入 Hermes home；进度组件默认还写入 `/opt/data/team-progress` 和 `/usr/local/bin`，通常需要 root；
 - NPU 任务本身需要正确安装驱动、固件、CANN 和对应框架，但这些不是建队脚本自动决定的“部署栈”。
 
-先配置你自己的 API/模型。仓库不知道也不应知道你的供应商、Key 或 endpoint：
+先从固定源码安装 Hermes；已经安装 0.17.0 的用户可跳过：
 
 ```bash
+./scripts/install-hermes.sh --dry-run
+./install.sh --install-hermes
+```
+
+安装过程会在本机重建 Python/Node/Playwright 依赖，它们不会进入 Git。随后配置你自己的 API/模型；仓库不知道也不应知道你的供应商、Key 或 endpoint：
+
+```bash
+hermes setup
 hermes config path
-# 使用你的 Hermes 版本所提供的配置流程，完成 provider/model/API 设置
 hermes config check
 ```
 
@@ -39,6 +46,7 @@ git clone https://github.com/maxwel1o/expert.git
 cd expert
 python3 tools/validate_release.py
 chmod +x install.sh scripts/*.sh team_progress/assets/*
+chmod +x vendor/hermes-agent/setup-hermes.sh
 ```
 
 如果 Hermes 在容器中，在第二个终端先进入同一容器：
@@ -50,32 +58,46 @@ cd /path/to/expert
 
 ## 4. 安装方式
 
-推荐先看变更范围：
+新环境严格按照三个阶段执行：
 
 ```bash
-sudo ./scripts/setup-team.sh --dry-run
+# 阶段一：安装 Hermes Agent 0.17.0
+./install.sh --install-hermes
+
+# 阶段二：用户自行写入本机 API/模型配置
+hermes setup
+hermes config check
+
+# 阶段三：安装五角色团队
+./install.sh
+```
+
+已经有 Hermes 0.17.0 且完成 API 配置时，直接从阶段三开始。推荐先看团队变更范围：
+
+```bash
+./scripts/setup-team.sh --dry-run
 sudo ./scripts/install-team-progress.sh --dry-run
 ```
 
 基础团队（五角色 + 201 Skill）：
 
 ```bash
-sudo ./install.sh
+./install.sh
 ```
 
 基础团队加进度观察：
 
 ```bash
-sudo ./install.sh --with-progress
+./install.sh --with-progress
 ```
 
 也可逐项执行：
 
 ```bash
-sudo ./scripts/setup-team.sh --apply
-sudo ./scripts/install-skills.sh
+./scripts/setup-team.sh --apply
+./scripts/install-skills.sh
 sudo ./scripts/install-team-progress.sh --apply   # 可选
-sudo ./scripts/verify-team.sh
+./scripts/verify-team.sh
 ```
 
 安装行为：
@@ -168,6 +190,8 @@ roles/{deployer,tester,profiler,analyst}/SOUL.md
 skills/<role>/<skill>/SKILL.md
 manifests/skills.csv
 team_progress/
+vendor/hermes-agent/                       # 固定的 Hermes 0.17.0 源码
+vendor/hermes-agent/VENDORED-SOURCE.md     # 版本、来源、许可证和导出哈希
 ```
 
 安装后位置由 `hermes config path` 决定。常见容器布局为：

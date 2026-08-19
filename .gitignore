@@ -18,3 +18,17 @@ build/
 .hermes/
 hermes_state/
 credentials/
+
+# Rebuilt locally from the vendored Hermes Agent source
+vendor/hermes-agent/.venv/
+vendor/hermes-agent/venv/
+vendor/hermes-agent/node_modules/
+vendor/hermes-agent/.playwright/
+vendor/hermes-agent/.pytest-cache/
+vendor/hermes-agent/*.egg-info/
+vendor/hermes-agent/.install_method
+vendor/hermes-agent/.env
+
+# Hermes ships prebuilt TUI/plugin dashboards required by the runtime.
+!vendor/hermes-agent/**/dist/
+!vendor/hermes-agent/**/dist/**

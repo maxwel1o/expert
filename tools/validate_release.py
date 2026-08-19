@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import re
 import sys
+import tomllib
 from pathlib import Path
 
 
@@ -25,6 +26,15 @@ SECRET_PATTERNS = {
     "OpenAI-style key": re.compile(r"(?i)sk-(?:proj-)?(?!x{20,}\b)[A-Za-z0-9]{20,}"),
     "GitHub token": re.compile(r"gh[pousr]_[A-Za-z0-9]{30,}"),
     "AWS access key": re.compile(r"AKIA[0-9A-Z]{16}"),
+}
+HERMES_ROOT = ROOT / "vendor" / "hermes-agent"
+HERMES_FORBIDDEN_PARTS = {
+    ".venv",
+    "venv",
+    "node_modules",
+    ".playwright",
+    ".pytest-cache",
+    "__pycache__",
 }
 
 
@@ -63,6 +73,43 @@ def validate_skills(rows: list[dict[str, str]]) -> None:
         fail(f"skill counts mismatch: {counts}")
 
 
+def validate_hermes_source() -> None:
+    required = (
+        "README.md",
+        "LICENSE",
+        "pyproject.toml",
+        "uv.lock",
+        "setup-hermes.sh",
+        "VENDORED-SOURCE.md",
+    )
+    for relative in required:
+        if not (HERMES_ROOT / relative).is_file():
+            fail(f"missing vendored Hermes file: vendor/hermes-agent/{relative}")
+
+    metadata = tomllib.loads((HERMES_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    project = metadata.get("project", {})
+    expected = {"name": "hermes-agent", "version": "0.17.0", "license": "MIT"}
+    actual = {key: project.get(key) for key in expected}
+    if actual != expected:
+        fail(f"vendored Hermes metadata mismatch: {actual}")
+
+    for path in HERMES_ROOT.rglob("*"):
+        relative = path.relative_to(HERMES_ROOT)
+        if any(part in HERMES_FORBIDDEN_PARTS for part in relative.parts):
+            fail(f"vendored Hermes contains rebuilt dependency/state: {relative.as_posix()}")
+        if path.name in {".env", ".install_method"}:
+            fail(f"vendored Hermes contains runtime state: {relative.as_posix()}")
+        if path.name.endswith((".pyc", ".egg-info")):
+            fail(f"vendored Hermes contains generated file: {relative.as_posix()}")
+
+    installer = ROOT / "scripts" / "install-hermes.sh"
+    if not installer.is_file():
+        fail("missing scripts/install-hermes.sh")
+    installer_text = installer.read_text(encoding="utf-8")
+    if 'EXPECTED_VERSION="0.17.0"' not in installer_text:
+        fail("Hermes installer is not pinned to 0.17.0")
+
+
 def validate_hygiene() -> None:
     for path in ROOT.rglob("*"):
         if ".git" in path.parts or not path.is_file():
@@ -70,7 +117,10 @@ def validate_hygiene() -> None:
         rel = path.relative_to(ROOT).as_posix()
         if "\ufffd" in rel:
             fail(f"Unicode replacement character in path: {rel}")
-        if rel == "tests/team_progress/test_security.py":
+        if rel in {
+            "tests/team_progress/test_security.py",
+            "vendor/hermes-agent/agent/redact.py",
+        }:
             continue
         if rel != ".env.example" and FORBIDDEN_NAMES.search(rel):
             fail(f"forbidden runtime/secret file: {rel}")
@@ -89,8 +139,10 @@ def main() -> int:
     validate_roles()
     rows = read_manifest()
     validate_skills(rows)
+    validate_hermes_source()
     validate_hygiene()
     print("release validation passed")
+    print("Hermes Agent: vendored source 0.17.0 (MIT)")
     print("roles: 5 (1 Leader + 4 independent Workers)")
     print("skills: 201")
     for role in ROLES:

@@ -1,4 +1,15 @@
-# Third-party Skills
+# Third-party software and Skills
+
+## Hermes Agent
+
+This repository includes a source snapshot of Hermes Agent 0.17.0 under
+`vendor/hermes-agent/`. Hermes Agent is copyright Nous Research and licensed
+under the MIT License. The upstream project is
+[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent); the
+vendored license is preserved at `vendor/hermes-agent/LICENSE`, and snapshot
+provenance is recorded in `vendor/hermes-agent/VENDORED-SOURCE.md`.
+
+## Agent Skills
 
 This repository bundles 201 public Agent Skills so that the five-role demo can
 be installed reproducibly. The project-level `LICENSE` does **not** relicense

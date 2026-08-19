@@ -2,6 +2,13 @@
 
 本仓库记录的是已经运行验证过的五角色 Hermes NPU 专家团队链路 Demo，而不是后续规划中的九类专家系统。
 
+## Hermes 本体
+
+- 固定版本：Hermes Agent `0.17.0`（2026.6.19）。
+- 官方来源：`https://github.com/NousResearch/hermes-agent`。
+- 许可证：MIT，源码快照位于 `vendor/hermes-agent/`。
+- 不提交 `.venv`、`venv`、`node_modules`、Playwright 浏览器、缓存或 API 配置；依赖由安装脚本在目标机器重建。
+
 ## 角色
 
 - 默认 Hermes Agent：Leader，也是所有用户根任务的唯一入口；不额外创建 `leader` Profile。
@@ -35,4 +42,4 @@
 
 ## 发布边界
 
-角色、Skill 和进度组件来自实际部署状态的只读导出，并使用 [`manifests/skills.sha256`](../manifests/skills.sha256) 固定文件内容。仓库不包含 API 配置、`.env`、`config.yaml`、Token、数据库、服务器地址、日志、备份或历史任务数据。
+Hermes 源码、角色、Skill 和进度组件来自实际部署状态的只读导出；Hermes 来源记录在 [`VENDORED-SOURCE.md`](../vendor/hermes-agent/VENDORED-SOURCE.md)，团队 Skill 使用 [`manifests/skills.sha256`](../manifests/skills.sha256) 固定文件内容。仓库不包含 API 配置、`.env`、`config.yaml`、Token、数据库、服务器地址、日志、备份或历史任务数据。

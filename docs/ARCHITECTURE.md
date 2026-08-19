@@ -1,5 +1,14 @@
 # 架构说明
 
+## 四层交付结构
+
+1. Hermes 本体层：`vendor/hermes-agent/` 保存 0.17.0 固定源码，提供对话、Profile、Kanban、Gateway、TUI 和工具运行时。
+2. 团队角色层：默认 Agent 作为 Leader，四个独立 Profile 作为 Worker，边界由 `roles/*/SOUL.md` 固定。
+3. 专业能力层：201 个角色级 Skill 按职责隔离安装，避免 Leader 读取全部专业说明。
+4. 观察层：`team_progress` 利用 Hermes Kanban 事实源、生命周期 Hook 和 SQLite 汇总长任务进度与最终状态。
+
+Hermes 依赖与用户运行状态不属于源码交付层；它们在目标机器安装或生成。API 配置始终属于用户本地运行环境。
+
 ## 责任模型
 
 - 默认 Agent 是唯一 Leader，也是用户根任务的唯一入口。

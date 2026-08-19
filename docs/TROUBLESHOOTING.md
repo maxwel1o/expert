@@ -1,5 +1,14 @@
 # 故障排查
 
+## Hermes 未安装或版本不一致
+
+```bash
+./scripts/install-hermes.sh --dry-run
+hermes --version
+```
+
+仓库固定支持 Hermes Agent 0.17.0。不存在 Hermes 时运行 `./install.sh --install-hermes`；发现其他版本时脚本会停止，避免把五角色配置写入未经验证的接口版本。可以设置 `HERMES_BIN` 指向正确的 0.17.0 可执行文件。
+
 ## `Unknown toolset 'kanban'`
 
 不要执行 `hermes tools enable kanban`。在已验证的 Hermes v0.17.x 配置中，Kanban 是顶层 `toolsets` 项；`setup-team.sh` 会写入配置并执行 `hermes kanban init`。
